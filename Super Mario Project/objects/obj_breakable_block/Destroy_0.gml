@@ -1,0 +1,1 @@
+effect_create_layer("Effects", ef_explosion, x, y, 7, c_maroon);
