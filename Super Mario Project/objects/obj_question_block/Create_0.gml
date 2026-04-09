@@ -6,7 +6,7 @@ get_hit_below = function() {
 		hit = true;
 		
 		item = instance_create_layer(x + 16, y - 16, "Instances", obj_item);
-		item.itemType = "Super Mushroom";
+		item.itemType = itemContained;
 		item.poppingOut = "Up";
 	}
 }
@@ -17,7 +17,7 @@ get_hit_above = function() {
 		hit = true;
 		
 		item = instance_create_layer(x + 16, y - 16, "Instances", obj_item);
-		item.itemType = "Super Mushroom";
+		item.itemType = itemContained;
 		item.poppingOut = "Down";
 	}
 }

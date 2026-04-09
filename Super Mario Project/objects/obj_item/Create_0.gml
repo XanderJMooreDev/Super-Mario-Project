@@ -3,7 +3,7 @@ velocityX = 0;
 velocityY = 0;
 terminalFallSpeed = 7;
 
-still_items = [ "Fire Flower" ];
+still_items = [ "Fire Flower", "Boomerang Flower" ];
 
 poppingOut = "Up";
 
@@ -68,5 +68,14 @@ animate = function() {
 	switch itemType {
 		case "Super Mushroom":
 			sprite_index = spr_power_super_mushroom;
+			break;
+		case "Fire Flower":
+			sprite_index = spr_power_fire_flower;
+			break;
+		case "Boomerang Flower":
+			sprite_index = spr_power_boomerang_flower;
+			break;
+		default:
+			show_debug_message(itemType);
 	}
 }

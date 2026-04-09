@@ -13,7 +13,11 @@ powerUp = "Small";
 powerCooldown = 0;
 powerTransition = 31;
 
+iFrames = 0;
+
 crouching = false;
+
+dove = false;
 
 diveOverpowerJoyX = 0;
 wallOverpowerJoyX = 0;
@@ -27,16 +31,19 @@ hasAerialSpun = false;
 
 collideable_terrain = [ obj_simple_terrain ];
 breakable_terrain = [ obj_breakable_block ];
-power_ups = [ "Small", "Super" ];
-stand_sprites = [ spr_mario_stand_small, spr_mario_stand_super ];
-walk_sprites = [ spr_mario_walk_small, spr_mario_walk_super ];
-jump_sprites = [ spr_mario_jump_small, spr_mario_jump_super ];
-gp_sprites = [ spr_mario_gp_small, spr_mario_gp_super ];
-spin_sprites = [ spr_mario_spin_small, spr_mario_spin_super ];
-crouch_sprites = [ spr_mario_crouch_small, spr_mario_crouch_super ];
+power_ups = [ "Small", "Super", "Fire", "Boomerang" ];
+stand_sprites = [ spr_mario_stand_small, spr_mario_stand_super, spr_mario_stand_fire, spr_mario_stand_boomerang ];
+walk_sprites = [ spr_mario_walk_small, spr_mario_walk_super, spr_mario_walk_fire, spr_mario_walk_boomerang ];
+wall_sprites = [ spr_mario_wall_small, spr_mario_wall_super, spr_mario_wall_fire, spr_mario_wall_boomerang ];
+jump_sprites = [ spr_mario_jump_small, spr_mario_jump_super, spr_mario_jump_fire, spr_mario_jump_boomerang ];
+gp_sprites = [ spr_mario_gp_small, spr_mario_gp_super, spr_mario_gp_fire, spr_mario_gp_boomerang ];
+spin_sprites = [ spr_mario_spin_small, spr_mario_spin_super, spr_mario_spin_fire, spr_mario_spin_boomerang ];
+crouch_sprites = [ spr_mario_crouch_small, spr_mario_crouch_super, spr_mario_crouch_fire, spr_mario_crouch_boomerang ];
+power_sprites = [ spr_mario_crouch_small, spr_mario_crouch_super, spr_mario_power_fire, spr_mario_power_boomerang ];
 
 check_controls = function () {
 	jumpControl = keyboard_check_pressed(vk_space) || keyboard_check_pressed(ord("W"));
+	jumpHoldControl = keyboard_check(vk_space) || keyboard_check(ord("W"));
 	gpControl = keyboard_check_pressed(ord("S"));
 	crouchControl = keyboard_check(ord("S"));
 	leftControl = keyboard_check(ord("A"));
@@ -146,28 +153,56 @@ apply_gravity = function() {
 		}
 	}
 	
-	if jumpControl && check_ground_at(x, y + 6) {
-		if crouchControl {
-			velocityY = -jumpStrength / 3 * 2;
-			diveOverpowerJoyX = facingDir * 30;
+	if jumpControl {
+		if check_ground_at(x, y + 6) {
+			if crouchControl {
+				velocityY = -jumpStrength / 3 * 2;
+				diveOverpowerJoyX = facingDir * 30;
+				
+				return;
+			}
+			else {
+				velocityY = -jumpStrength;
+				return;
+			}
 		}
 		else {
+			if crouchControl && !dove {
+				dove = true;
+				velocityY = -jumpStrength / 3 * 2;
+				diveOverpowerJoyX = facingDir * 30;
+			}
+		}
+	}
+	
+	if check_ground_at(x + joystickX * 8, y) && !check_ground_at(x, y + 8) {
+		if jumpControl || abs(wallOverpowerJoyX) > 10 {
+			effect_create_layer("Effects", ef_smoke, x, y, 4, c_grey);
 			velocityY = -jumpStrength;
+			wallOverpowerJoyX = -joystickX * 14;
+		}
+		else if velocityY > 0 {
+			velocityY = 3;
+			
+			if !check_ground_at(x, y + velocityY) {
+				y += velocityY;
+			}
 		}
 	}
-	else if check_ground_at(x + joystickX * 8, y) && !check_ground_at(x, y + 8) {
-		effect_create_layer("Effects", ef_smoke, x, y, 4, c_grey);
-		velocityY = -jumpStrength;
-		wallOverpowerJoyX = -joystickX * 14;
-	}
-	else if jumpControl && !hasAerialSpun && wallOverpowerJoyX == 0 {
-		if crouchControl {
-			diveOverpowerJoyX = facingDir * 30;
-		}
-		else {	
+	
+	if jumpControl && !hasAerialSpun && wallOverpowerJoyX == 0 {
+		if !crouchControl {	
 			spinFrame = 0;
 			velocityY = -spinStrength;
 			hasAerialSpun = true;
+			
+			if powerUp == "Fire" {
+				fireball = instance_create_layer(x, y, "Instances", obj_player_fireball);
+				fireball.image_xscale = facingDir;
+			
+				fireball = instance_create_layer(x, y, "Instances", obj_player_fireball);
+				fireball.image_xscale = -facingDir;
+			}
 		
 			create_star_effect();
 		}
@@ -176,6 +211,7 @@ apply_gravity = function() {
 		velocityY = 0;
 		
 		hasAerialSpun = false;
+		dove = false;
 	}
 	else if check_ground_at(x, y + velocityY) && velocityY < 0 {
 		velocityY = 0;
@@ -230,6 +266,48 @@ check_ground_at = function(cx, cy) {
 		return true;
 	}
 	
+	if place_meeting(x, y, obj_player_boomerang) {
+		if instance_place(x, y, obj_player_boomerang).velocityX /
+		instance_place(x, y, obj_player_boomerang).startDir < 0 {
+			instance_destroy(instance_place(x, y, obj_player_boomerang));
+			
+			if check_ground_at(x, y + 8) {
+				return;
+			}
+			
+			velocityY = -jumpStrength;
+			velocityX = 3 * facingDir;
+		}
+	}
+	
+	if place_meeting(x, y + 8, obj_simple_enemy) &&
+	!place_meeting(x, y, obj_simple_enemy) && 
+	instance_place(x, y + 8, obj_simple_enemy).dying == false {
+		instance_place(x, y + 8, obj_simple_enemy).kill_stomp();
+		
+		if jumpHoldControl {
+			velocityY = -jumpStrength;
+		}
+		else {
+			velocityY = -jumpStrength / 2;
+		}
+	}
+	else if place_meeting(x, y, obj_simple_enemy) && 
+	instance_place(x, y, obj_simple_enemy).dying == false
+	&& iFrames = 0 {
+		if powerUp == "Small" {
+			die();
+		}
+		else if powerUp = "Super" {
+			powerUp = "Small";
+			iFrames = 60;
+		}
+		else {
+			powerUp = "Super";
+			iFrames = 60;
+		}
+	}
+	
 	return false;
 }
 
@@ -243,14 +321,25 @@ create_star_effect = function() {
 }
 
 use_power = function() {
-	if powerCooldown > 0 {
+	if powerCooldown > 0 || !powerControl {
 		powerCooldown--;
 		return;
 	}
 	
 	switch powerUp {
 	case "Fire":
-		powerCooldown = 12;
+		powerCooldown = 30;
+		fireball = instance_create_layer(x, y, "Instances", obj_player_fireball);
+		fireball.image_xscale = facingDir;
+		break;
+	case "Boomerang":
+		if !instance_exists(obj_player_boomerang) {
+			powerCooldown = 30;
+			boomerang = instance_create_layer(x, y, "Instances", obj_player_boomerang);
+			boomerang.startDir = facingDir;
+			boomerang.throw_start();
+		}
+		break;
 	default:
 		break;
 	}
@@ -260,12 +349,18 @@ pick_up_power_up = function() {
 	if place_meeting(x, y, obj_item) {
 		lastPower = powerUp;
 		
-		switch obj_item.itemType {
+		switch instance_place(x, y, obj_item).itemType {
 		case "Super Mushroom":
 			if powerUp == "Small" {
 				powerUp = "Super";
 			}
 			
+			break;
+		case "Fire Flower":
+			powerUp = "Fire";
+			break;
+		case "Boomerang Flower":
+			powerUp = "Boomerang";
 			break;
 		default:
 			break;
@@ -283,10 +378,17 @@ animate = function() {
 	image_xscale = facingDir * 2;
 	image_yscale = 2;
 	
-	if spinFrame < 4 {
+	if powerCooldown > 25 {
+		sprite_index = power_sprites[array_get_index(power_ups, powerUp)];
+	}
+	else if spinFrame < 4 {
 		sprite_index = spin_sprites[array_get_index(power_ups, powerUp)];
 		image_index = floor(spinFrame);
 		spinFrame += .3;
+	}
+	else if check_ground_at(x + joystickX * 8, y) && !check_ground_at(x, y + 8) &&
+		!(jumpControl || abs(wallOverpowerJoyX) > 10) && velocityY > 0 {
+			sprite_index = wall_sprites[array_get_index(power_ups, powerUp)];
 	}
 	else if crouching {
 		sprite_index = crouch_sprites[array_get_index(power_ups, powerUp)];
@@ -302,6 +404,12 @@ animate = function() {
 	}
 	else {
 		sprite_index = stand_sprites[array_get_index(power_ups, powerUp)];
+	}
+	
+	if iFrames > 0 {
+		image_alpha = iFrames % 2;
+		
+		iFrames--;
 	}
 	
 	if powerUp == "Small" {
@@ -331,4 +439,9 @@ transition_power = function(pre, post) {
 	}
 	
 	powerTransition++;
+}
+
+die = function() {
+	//image_alpha = 0;
+	obj_game_manager.playable = false;
 }
