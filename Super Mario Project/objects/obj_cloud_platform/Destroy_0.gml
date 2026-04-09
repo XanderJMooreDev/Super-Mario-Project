@@ -1,0 +1,1 @@
+effect_create_layer("Effects", ef_smoke, x, y, 4, c_white);

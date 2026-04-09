@@ -29,17 +29,17 @@ gpStrength = 14;
 
 hasAerialSpun = false;
 
-collideable_terrain = [ obj_simple_terrain ];
+collideable_terrain = [ obj_simple_terrain, obj_cloud_platform ];
 breakable_terrain = [ obj_breakable_block ];
-power_ups = [ "Small", "Super", "Fire", "Boomerang" ];
-stand_sprites = [ spr_mario_stand_small, spr_mario_stand_super, spr_mario_stand_fire, spr_mario_stand_boomerang ];
-walk_sprites = [ spr_mario_walk_small, spr_mario_walk_super, spr_mario_walk_fire, spr_mario_walk_boomerang ];
-wall_sprites = [ spr_mario_wall_small, spr_mario_wall_super, spr_mario_wall_fire, spr_mario_wall_boomerang ];
-jump_sprites = [ spr_mario_jump_small, spr_mario_jump_super, spr_mario_jump_fire, spr_mario_jump_boomerang ];
-gp_sprites = [ spr_mario_gp_small, spr_mario_gp_super, spr_mario_gp_fire, spr_mario_gp_boomerang ];
-spin_sprites = [ spr_mario_spin_small, spr_mario_spin_super, spr_mario_spin_fire, spr_mario_spin_boomerang ];
-crouch_sprites = [ spr_mario_crouch_small, spr_mario_crouch_super, spr_mario_crouch_fire, spr_mario_crouch_boomerang ];
-power_sprites = [ spr_mario_crouch_small, spr_mario_crouch_super, spr_mario_power_fire, spr_mario_power_boomerang ];
+power_ups = [ "Small", "Super", "Fire", "Boomerang", "Cloud" ];
+stand_sprites = [ spr_mario_stand_small, spr_mario_stand_super, spr_mario_stand_fire, spr_mario_stand_boomerang, spr_mario_stand_cloud ];
+walk_sprites = [ spr_mario_walk_small, spr_mario_walk_super, spr_mario_walk_fire, spr_mario_walk_boomerang, spr_mario_walk_cloud ];
+wall_sprites = [ spr_mario_wall_small, spr_mario_wall_super, spr_mario_wall_fire, spr_mario_wall_boomerang, spr_mario_wall_cloud ];
+jump_sprites = [ spr_mario_jump_small, spr_mario_jump_super, spr_mario_jump_fire, spr_mario_jump_boomerang, spr_mario_jump_cloud ];
+gp_sprites = [ spr_mario_gp_small, spr_mario_gp_super, spr_mario_gp_fire, spr_mario_gp_boomerang, spr_mario_gp_cloud ];
+spin_sprites = [ spr_mario_spin_small, spr_mario_spin_super, spr_mario_spin_fire, spr_mario_spin_boomerang, spr_mario_spin_cloud ];
+crouch_sprites = [ spr_mario_crouch_small, spr_mario_crouch_super, spr_mario_crouch_fire, spr_mario_crouch_boomerang, spr_mario_crouch_cloud ];
+power_sprites = [ spr_mario_crouch_small, spr_mario_crouch_super, spr_mario_power_fire, spr_mario_power_boomerang, spr_mario_crouch_cloud ];
 
 check_controls = function () {
 	jumpControl = keyboard_check_pressed(vk_space) || keyboard_check_pressed(ord("W"));
@@ -203,6 +203,9 @@ apply_gravity = function() {
 				fireball = instance_create_layer(x, y, "Instances", obj_player_fireball);
 				fireball.image_xscale = -facingDir;
 			}
+            else if powerUp == "Cloud" {
+                instance_create_layer(x, y + 52, "Instances", obj_cloud_platform);
+            }
 		
 			create_star_effect();
 		}
@@ -230,6 +233,10 @@ apply_gravity = function() {
 check_ground_at = function(cx, cy) {
 	for (i = 0; i < array_length(collideable_terrain); i++) {
 		if place_meeting(cx, cy, collideable_terrain[i]) {
+            if place_meeting(cx, cy, obj_cloud_platform) && gpAirStall < 0 {
+                instance_destroy(instance_place(cx, cy, obj_cloud_platform));
+            }
+            
 			return true;
 		}
 	};
@@ -361,6 +368,9 @@ pick_up_power_up = function() {
 			break;
 		case "Boomerang Flower":
 			powerUp = "Boomerang";
+			break;
+		case "Cloud Flower":
+			powerUp = "Cloud";
 			break;
 		default:
 			break;
