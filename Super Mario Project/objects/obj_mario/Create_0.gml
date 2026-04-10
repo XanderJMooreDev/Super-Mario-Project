@@ -31,6 +31,7 @@ hasAerialSpun = false;
 
 collideable_terrain = [ obj_simple_terrain, obj_cloud_platform ];
 breakable_terrain = [ obj_breakable_block ];
+
 power_ups = [ "Small", "Super", "Fire", "Boomerang", "Cloud" ];
 stand_sprites = [ spr_mario_stand_small, spr_mario_stand_super, spr_mario_stand_fire, spr_mario_stand_boomerang, spr_mario_stand_cloud ];
 walk_sprites = [ spr_mario_walk_small, spr_mario_walk_super, spr_mario_walk_fire, spr_mario_walk_boomerang, spr_mario_walk_cloud ];
@@ -203,14 +204,24 @@ apply_gravity = function() {
 				fireball = instance_create_layer(x, y, "Instances", obj_player_fireball);
 				fireball.image_xscale = -facingDir;
 			}
-            else if powerUp == "Cloud" {
+            else if powerUp == "Cloud" && obj_game_manager.cloud_platforms > 0 {
                 instance_create_layer(x, y + 52, "Instances", obj_cloud_platform);
+                
+                for (i = 0; i < obj_game_manager.cloud_platforms; i++) {
+                    
+                }
             }
 		
 			create_star_effect();
 		}
 	}
 	else if check_ground_at(x, y + velocityY) && velocityY > 1 {
+        
+        if !place_meeting(x, y + velocityY, obj_cloud_platform) {
+            obj_game_manager.cloud_platforms = 2; 
+            instance_destroy(obj_cloud_platform);
+        }
+        
 		velocityY = 0;
 		
 		hasAerialSpun = false;
@@ -235,6 +246,8 @@ check_ground_at = function(cx, cy) {
 		if place_meeting(cx, cy, collideable_terrain[i]) {
             if place_meeting(cx, cy, obj_cloud_platform) && gpAirStall < 0 {
                 instance_destroy(instance_place(cx, cy, obj_cloud_platform));
+                
+                obj_game_manager.cloud_platforms++;
             }
             
 			return true;
@@ -309,6 +322,13 @@ check_ground_at = function(cx, cy) {
 			powerUp = "Small";
 			iFrames = 60;
 		}
+		else if powerUp == "Cloud" {
+			powerUp = "Super";
+			iFrames = 60;
+            
+            obj_game_manager.dequeue_cloud();
+            obj_game_manager.dequeue_cloud();
+		}
 		else {
 			powerUp = "Super";
 			iFrames = 60;
@@ -355,6 +375,11 @@ use_power = function() {
 pick_up_power_up = function() {
 	if place_meeting(x, y, obj_item) {
 		lastPower = powerUp;
+        
+        if powerUp == "Cloud" && instance_place(x, y, obj_item).itemType != "Super Mushroom" {
+            obj_game_manager.dequeue_cloud();
+            obj_game_manager.dequeue_cloud();
+        }
 		
 		switch instance_place(x, y, obj_item).itemType {
 		case "Super Mushroom":
@@ -370,7 +395,15 @@ pick_up_power_up = function() {
 			powerUp = "Boomerang";
 			break;
 		case "Cloud Flower":
+            if powerUp != "Cloud" {
+                cloud = instance_create_layer(x + 4, y - 10, "Instances", obj_floating_cloud);
+                obj_game_manager.enqueue_cloud(cloud);
+                cloud = instance_create_layer(x - 4, y - 10, "Instances", obj_floating_cloud);
+                obj_game_manager.enqueue_cloud(cloud);
+            }
+            
 			powerUp = "Cloud";
+            
 			break;
 		default:
 			break;

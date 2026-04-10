@@ -42,6 +42,7 @@
   "resources":[
     {"id":{"name":"obj_breakable_block","path":"objects/obj_breakable_block/obj_breakable_block.yy",},},
     {"id":{"name":"obj_cloud_platform","path":"objects/obj_cloud_platform/obj_cloud_platform.yy",},},
+    {"id":{"name":"obj_floating_cloud","path":"objects/obj_floating_cloud/obj_floating_cloud.yy",},},
     {"id":{"name":"obj_game_manager","path":"objects/obj_game_manager/obj_game_manager.yy",},},
     {"id":{"name":"obj_item","path":"objects/obj_item/obj_item.yy",},},
     {"id":{"name":"obj_mario","path":"objects/obj_mario/obj_mario.yy",},},
@@ -56,6 +57,7 @@
     {"id":{"name":"spr_cloud_platform","path":"sprites/spr_cloud_platform/spr_cloud_platform.yy",},},
     {"id":{"name":"spr_empty_block","path":"sprites/spr_empty_block/spr_empty_block.yy",},},
     {"id":{"name":"spr_fireball","path":"sprites/spr_fireball/spr_fireball.yy",},},
+    {"id":{"name":"spr_floating_cloud","path":"sprites/spr_floating_cloud/spr_floating_cloud.yy",},},
     {"id":{"name":"spr_goomba","path":"sprites/spr_goomba/spr_goomba.yy",},},
     {"id":{"name":"spr_hitbox_small","path":"sprites/spr_hitbox_small/spr_hitbox_small.yy",},},
     {"id":{"name":"spr_hitbox_super","path":"sprites/spr_hitbox_super/spr_hitbox_super.yy",},},

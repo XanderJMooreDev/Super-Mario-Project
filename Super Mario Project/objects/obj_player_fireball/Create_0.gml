@@ -1,6 +1,6 @@
 velocityX = 0;
 velocityY = 0;
-walkSpeed = 5;
+walkSpeed = 6;
 
 terminalFallSpeed = 4;
 
