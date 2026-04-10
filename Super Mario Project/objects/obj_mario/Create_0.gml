@@ -29,7 +29,7 @@ gpStrength = 14;
 
 hasAerialSpun = false;
 
-collideable_terrain = [ obj_simple_terrain, obj_cloud_platform ];
+collideable_terrain = [ layer_tilemap_get_id("Tiles"), obj_cloud_platform ];
 breakable_terrain = [ obj_breakable_block ];
 
 power_ups = [ "Small", "Super", "Fire", "Boomerang", "Cloud" ];

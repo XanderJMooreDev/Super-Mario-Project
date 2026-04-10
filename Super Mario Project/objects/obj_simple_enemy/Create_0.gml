@@ -75,7 +75,7 @@ wobble = function() {
 		}
 	}
 	
-	if place_meeting(x + velocityX, y, obj_question_block) {
+	if place_meeting(x + velocityX, y, obj_question_block) || place_meeting(x + velocityX, y, obj_simple_enemy) {
 		velocityX *= -1;
 		return;
 	}
