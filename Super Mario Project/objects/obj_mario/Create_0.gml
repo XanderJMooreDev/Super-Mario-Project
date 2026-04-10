@@ -8,6 +8,9 @@ walkSpeed = 8;
 
 spinFrame = 9;
 
+alive = true;
+deathHop = 300;
+
 lastPower = "Small";
 powerUp = "Small";
 powerCooldown = 0;
@@ -299,6 +302,32 @@ check_ground_at = function(cx, cy) {
 			velocityX = 3 * facingDir;
 		}
 	}
+    
+    if place_meeting(x, y + 8, obj_shell) &&
+	!place_meeting(x, y, obj_shell) {
+		if instance_place(x, y + 8, obj_shell).velocityX == 0 {
+            instance_place(x, y + 8, obj_shell).velocityX = facingDir * 10;
+        }
+        else {
+            instance_place(x, y + 8, obj_shell).velocityX = 0;
+        }
+            
+		if jumpHoldControl {
+			velocityY = -jumpStrength;
+		}
+		else {
+			velocityY = -jumpStrength / 2;
+		}
+	}
+    else if place_meeting(x, y, obj_shell) {
+        if obj_shell.velocityX = 0 { 
+            instance_place(x, y + 8, obj_shell).velocityX = facingDir * 8;
+            instance_place(x, y + 8, obj_shell).x += facingDir * 8;
+        }
+        else if iFrames = 0 {
+		  take_damage();
+        }
+    }
 	
 	if place_meeting(x, y + 8, obj_simple_enemy) &&
 	!place_meeting(x, y, obj_simple_enemy) && 
@@ -315,7 +344,14 @@ check_ground_at = function(cx, cy) {
 	else if place_meeting(x, y, obj_simple_enemy) && 
 	instance_place(x, y, obj_simple_enemy).dying == false
 	&& iFrames = 0 {
-		if powerUp == "Small" {
+		take_damage();
+	}
+	
+	return false;
+}
+
+take_damage = function() {
+    if powerUp == "Small" {
 			die();
 		}
 		else if powerUp = "Super" {
@@ -333,9 +369,6 @@ check_ground_at = function(cx, cy) {
 			powerUp = "Super";
 			iFrames = 60;
 		}
-	}
-	
-	return false;
 }
 
 create_star_effect = function() {
@@ -421,7 +454,10 @@ animate = function() {
 	image_xscale = facingDir * 2;
 	image_yscale = 2;
 	
-	if powerCooldown > 25 {
+    if !alive {
+        sprite_index = spr_mario_die;
+    }
+	else if powerCooldown > 25 {
 		sprite_index = power_sprites[array_get_index(power_ups, powerUp)];
 	}
 	else if spinFrame < 4 {
@@ -485,6 +521,6 @@ transition_power = function(pre, post) {
 }
 
 die = function() {
-	//image_alpha = 0;
+	alive = false;
 	obj_game_manager.playable = false;
 }

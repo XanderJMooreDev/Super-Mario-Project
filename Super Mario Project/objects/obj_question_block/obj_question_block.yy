@@ -8,8 +8,8 @@
   "name":"obj_question_block",
   "overriddenProperties":[],
   "parent":{
-    "name":"Terrain",
-    "path":"folders/Objects/Terrain.yy",
+    "name":"Blocks",
+    "path":"folders/Objects/Blocks.yy",
   },
   "parentObjectId":null,
   "persistent":false,
