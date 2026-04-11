@@ -281,7 +281,7 @@ check_ground_at = function(cx, cy) {
 		velocityY = 0;
 	}
 	
-	if place_meeting(cx, cy,obj_question_block) && gpAirStall < 0 {
+	if place_meeting(x, y + velocityY, obj_question_block) && gpAirStall < 0 {
 		instance_place(x, y + velocityY, obj_question_block).get_hit_above();
 	}
 	
@@ -332,8 +332,14 @@ check_ground_at = function(cx, cy) {
 	if place_meeting(x, y + 8, obj_simple_enemy) &&
 	!place_meeting(x, y, obj_simple_enemy) && 
 	instance_place(x, y + 8, obj_simple_enemy).dying == false {
-		instance_place(x, y + 8, obj_simple_enemy).kill_stomp();
-		
+        if instance_place(x, y + 8, obj_simple_enemy).spiky {
+            take_damage();
+            return;
+        }
+        else {
+		  instance_place(x, y + 8, obj_simple_enemy).kill_stomp();
+        }
+            
 		if jumpHoldControl {
 			velocityY = -jumpStrength;
 		}
@@ -351,6 +357,10 @@ check_ground_at = function(cx, cy) {
 }
 
 take_damage = function() {
+    if iFrames > 0 {
+        return;
+    }
+    
     if powerUp == "Small" {
 			die();
 		}

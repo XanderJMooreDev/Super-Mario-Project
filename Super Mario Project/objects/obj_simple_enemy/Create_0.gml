@@ -1,5 +1,3 @@
-turnOnEdge = false;
-
 walkSpeed = 2;
 velocityX = 0;
 velocityY = 0;
@@ -11,8 +9,13 @@ iFrames = 0;
 
 dying = false;
 
-enemy_types = [ "Goomba", "Troopa_G", "Troopa_G_No_Shell" ];
-enemy_walk_sprites = [ spr_goomba, spr_troopa_g_walk, spr_troopa_g_walk_no_shell ];
+turnOnEdge = false;
+spiky = false;
+standStill = false;
+upsideDown = false;
+
+enemy_types = [ "Goomba", "Troopa_G", "Troopa_G_No_Shell", "Spiny", "Piranha Plant", "Piranha Plant U" ];
+enemy_walk_sprites = [ spr_goomba, spr_troopa_g_walk, spr_troopa_g_walk_no_shell, spr_spiny, spr_piranha_plant, spr_piranha_plant ];
 
 assign_properties = function() {
     turnOnEdge = false;
@@ -21,14 +24,36 @@ assign_properties = function() {
         case "Troopa_G":
             image_xscale = 1.5;
             image_yscale = 1.5;
+            break;
+        case "Spiny":
+            spiky = true;
+            break;
+        case "Piranha Plant":
+            spiky = true;
+            standStill = true;
+            break;
+        case "Piranha Plant U":
+            spiky = true;
+            standStill = true;
+            upsideDown = true;
+            break;
 		default:
 			break;
 	}
+    
+    if upsideDown {
+        image_yscale *= -1;
+    }
 }
 
 walk = function() { 
     if iFrames > 0 {
         iFrames--;
+    }
+    
+    if standStill {
+        sit_still();
+        return;
     }
     
 	if turnOnEdge = false {
@@ -57,10 +82,21 @@ sit_still = function() {
 		return;
 	}
 	
-	y += velocityY;
-			
-    if velocityY < terminalFallSpeed {
-        velocityY++;
+    if upsideDown {
+        y += velocityY;
+        
+   			
+        if velocityY < terminalFallSpeed {
+           velocityY--; 
+        }
+    }
+    else { 
+        y += velocityY;
+        
+   			
+        if velocityY < terminalFallSpeed {
+           velocityY++; 
+        }
     }
 }
 
@@ -152,13 +188,13 @@ kill_stomp = function() {
     
 	dying = true;
 	image_yscale = image_yscale / 2;
-	y += 8;
+	y += sprite_height / 2;
 	alarm[0] = 30;
 }
 
 kill_fall = function() { 
 	dying = true;
-	image_yscale = -1;
+	image_yscale *= -1;
 	
 	if y > obj_mario.y + 300 {
 		instance_destroy();

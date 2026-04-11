@@ -32,6 +32,10 @@ boomerang_thrown = function() {
 kill = function() {
 	if place_meeting(x, y, obj_simple_enemy) {
 		instance_place(x, y, obj_simple_enemy).kill_fall();
+	}
+    
+	if place_meeting(x, y, obj_shell) {
+		instance_destroy(instance_place(x, y, obj_shell));
 		
 		instance_destroy();
 	}
