@@ -15,7 +15,7 @@ boomerang_thrown = function() {
 	
 	for (i = 0; i < array_length(obj_mario.breakable_terrain); i++) {
 		if place_meeting(x + velocityX, y, obj_mario.breakable_terrain[i]) {
-			instance_destroy();
+			instance_destroy(instance_place(x + velocityX, y, obj_mario.breakable_terrain[i]));
 		}
 	}
 	

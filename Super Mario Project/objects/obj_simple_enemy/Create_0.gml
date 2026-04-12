@@ -14,8 +14,8 @@ spiky = false;
 standStill = false;
 upsideDown = false;
 
-enemy_types = [ "Goomba", "Troopa_G", "Troopa_G_No_Shell", "Spiny", "Piranha Plant", "Piranha Plant U" ];
-enemy_walk_sprites = [ spr_goomba, spr_troopa_g_walk, spr_troopa_g_walk_no_shell, spr_spiny, spr_piranha_plant, spr_piranha_plant ];
+enemy_types = [ "Goomba", "Troopa_G", "Troopa_G_No_Shell", "Spiny", "Piranha Plant", "Piranha Plant U", "Rex", "Rex_Stomped" ];
+enemy_walk_sprites = [ spr_goomba, spr_troopa_g_walk, spr_troopa_g_walk_no_shell, spr_spiny, spr_piranha_plant, spr_piranha_plant, spr_rex, spr_rex_stomped ];
 
 assign_properties = function() {
     turnOnEdge = false;
@@ -172,6 +172,14 @@ wobble = function() {
 
 kill_stomp = function() { 
     if iFrames > 0 {
+        return;
+    }
+    
+    if enemyType == "Rex" {
+        enemyType = "Rex_Stomped";
+        walkSpeed = 3;
+        velocityX *= 3/2;
+        iFrames = 30;
         return;
     }
     
