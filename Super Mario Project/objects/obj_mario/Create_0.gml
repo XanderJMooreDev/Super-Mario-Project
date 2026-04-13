@@ -32,7 +32,8 @@ gpStrength = 14;
 
 hasAerialSpun = false;
 
-collideable_terrain = [ layer_tilemap_get_id("Tiles"), obj_cloud_platform ];
+collideable_terrain = [ layer_tilemap_get_id("Tiles"), obj_cloud_platform,
+obj_chain_chomp_stump ];
 breakable_terrain = [ obj_breakable_block ];
 
 power_ups = [ "Small", "Super", "Fire", "Boomerang", "Cloud" ];
@@ -244,7 +245,8 @@ apply_gravity = function() {
 	image_angle = 0;
 }
 
-check_ground_at = function(cx, cy) {
+check_ground_at = function(cx, cy) { 
+    
 	for (i = 0; i < array_length(collideable_terrain); i++) {
 		if place_meeting(cx, cy, collideable_terrain[i]) {
             if place_meeting(cx, cy, obj_cloud_platform) && gpAirStall < 0 {
@@ -328,6 +330,11 @@ check_ground_at = function(cx, cy) {
 		  take_damage();
         }
     }
+    
+    if place_meeting(x, y, obj_chain_chomp) && !instance_place(x, y, obj_chain_chomp).dying {
+        take_damage();
+        return;
+    }
 	
 	if place_meeting(x, y + 8, obj_simple_enemy) &&
 	!place_meeting(x, y, obj_simple_enemy) && 
@@ -360,6 +367,9 @@ take_damage = function() {
     if iFrames > 0 {
         return;
     }
+    
+    lastPower = powerUp;
+    powerTransition = 0;
     
     if powerUp == "Small" {
 			die();
@@ -495,11 +505,14 @@ animate = function() {
 		sprite_index = stand_sprites[array_get_index(power_ups, powerUp)];
 	}
 	
-	if iFrames > 0 {
+	if iFrames > 0 && obj_game_manager.playable {
 		image_alpha = iFrames % 2;
 		
 		iFrames--;
 	}
+    else {
+        image_alpha = 1;
+    }
 	
 	if powerUp == "Small" {
 		mask_index = spr_hitbox_small;
