@@ -432,6 +432,9 @@ pick_up_power_up = function() {
         if powerUp == "Cloud" && instance_place(x, y, obj_item).itemType != "Super Mushroom" {
             obj_game_manager.dequeue_cloud();
             obj_game_manager.dequeue_cloud();
+            
+            instance_destroy(obj_cloud_platform);
+            instance_destroy(obj_cloud_platform);
         }
 		
 		switch instance_place(x, y, obj_item).itemType {

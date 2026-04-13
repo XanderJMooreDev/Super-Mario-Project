@@ -64,7 +64,7 @@ sit_still = function() {
 		return;
 	}
 	
-	if abs(y + velocityY - stump.y) > 130 {
+	if abs(y + velocityY - stump.y) > 130 && angleX != 0 {
         hit_edge();
 		return;
 	}
@@ -78,11 +78,11 @@ sit_still = function() {
 }
 
 wobble = function() {
-    if velocityX > walkSpeed {
+    if velocityX > walkSpeed && angleX == 0 {
         velocityX = walkSpeed;
     }
     
-    if velocityX < -walkSpeed {
+    if velocityX < -walkSpeed && angleX == 0 {
         velocityX = -walkSpeed;
     }
     
@@ -163,7 +163,7 @@ attempt_snap = function() {
     velocityX = angleX * 8;
     velocityY = angleY * 8;
 
-    alarm[1] = 180;
+    alarm[1] = 120;
 }
 
 hit_edge = function() {
