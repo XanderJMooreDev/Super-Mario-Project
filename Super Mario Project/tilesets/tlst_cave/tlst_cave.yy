@@ -1,8 +1,8 @@
 {
   "$GMTileSet":"v1",
-  "%Name":"tlst_grass",
+  "%Name":"tlst_cave",
   "autoTileSets":[
-    {"$GMAutoTileSet":"","%Name":"at_grass","closed_edge":false,"name":"at_grass","resourceType":"GMAutoTileSet","resourceVersion":"2.0","tiles":[
+    {"$GMAutoTileSet":"","%Name":"at_cave","closed_edge":false,"name":"at_cave","resourceType":"GMAutoTileSet","resourceVersion":"2.0","tiles":[
         10,4,5,19,10,4,5,19,10,4,5,19,10,4,5,19,9,22,9,5,7,7,7,7,11,11,23,4,13,4,5,24,15,2,6,6,8,8,14,20,12,
         21,1,17,16,18,3,
       ],},
@@ -16,7 +16,7 @@
     ],
     "TileDataFormat":1,
   },
-  "name":"tlst_grass",
+  "name":"tlst_cave",
   "out_columns":5,
   "out_tilehborder":2,
   "out_tilevborder":2,
@@ -27,8 +27,8 @@
   "resourceType":"GMTileSet",
   "resourceVersion":"2.0",
   "spriteId":{
-    "name":"spr_tile_grass",
-    "path":"sprites/spr_tile_grass/spr_tile_grass.yy",
+    "name":"spr_tile_cave",
+    "path":"sprites/spr_tile_cave/spr_tile_cave.yy",
   },
   "spriteNoExport":false,
   "textureGroupId":{
