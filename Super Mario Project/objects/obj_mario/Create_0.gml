@@ -5,8 +5,10 @@ facingDir = 1;
 jumpStrength = 18;
 spinStrength = 15;
 walkSpeed = 8;
+climbSpeed = 6;
 
 spinFrame = 9;
+attackFrame = 9;
 
 alive = true;
 deathHop = 300;
@@ -19,6 +21,7 @@ powerTransition = 31;
 iFrames = 0;
 
 crouching = false;
+climbing = false;
 
 dove = false;
 
@@ -36,15 +39,15 @@ collideable_terrain = [ layer_tilemap_get_id("Tiles"), obj_cloud_platform,
 obj_chain_chomp_stump ];
 breakable_terrain = [ obj_breakable_block ];
 
-power_ups = [ "Small", "Super", "Fire", "Boomerang", "Cloud" ];
-stand_sprites = [ spr_mario_stand_small, spr_mario_stand_super, spr_mario_stand_fire, spr_mario_stand_boomerang, spr_mario_stand_cloud ];
-walk_sprites = [ spr_mario_walk_small, spr_mario_walk_super, spr_mario_walk_fire, spr_mario_walk_boomerang, spr_mario_walk_cloud ];
-wall_sprites = [ spr_mario_wall_small, spr_mario_wall_super, spr_mario_wall_fire, spr_mario_wall_boomerang, spr_mario_wall_cloud ];
-jump_sprites = [ spr_mario_jump_small, spr_mario_jump_super, spr_mario_jump_fire, spr_mario_jump_boomerang, spr_mario_jump_cloud ];
-gp_sprites = [ spr_mario_gp_small, spr_mario_gp_super, spr_mario_gp_fire, spr_mario_gp_boomerang, spr_mario_gp_cloud ];
-spin_sprites = [ spr_mario_spin_small, spr_mario_spin_super, spr_mario_spin_fire, spr_mario_spin_boomerang, spr_mario_spin_cloud ];
-crouch_sprites = [ spr_mario_crouch_small, spr_mario_crouch_super, spr_mario_crouch_fire, spr_mario_crouch_boomerang, spr_mario_crouch_cloud ];
-power_sprites = [ spr_mario_crouch_small, spr_mario_crouch_super, spr_mario_power_fire, spr_mario_power_boomerang, spr_mario_crouch_cloud ];
+power_ups = [ "Small", "Super", "Fire", "Boomerang", "Cloud", "Raccoon", "Cat" ];
+stand_sprites = [ spr_mario_stand_small, spr_mario_stand_super, spr_mario_stand_fire, spr_mario_stand_boomerang, spr_mario_stand_cloud, spr_mario_stand_raccoon, spr_mario_stand_cat];
+walk_sprites = [ spr_mario_walk_small, spr_mario_walk_super, spr_mario_walk_fire, spr_mario_walk_boomerang, spr_mario_walk_cloud, spr_mario_walk_raccoon, spr_mario_walk_cat ];
+wall_sprites = [ spr_mario_wall_small, spr_mario_wall_super, spr_mario_wall_fire, spr_mario_wall_boomerang, spr_mario_wall_cloud, spr_mario_wall_raccoon, spr_mario_wall_cat ];
+jump_sprites = [ spr_mario_jump_small, spr_mario_jump_super, spr_mario_jump_fire, spr_mario_jump_boomerang, spr_mario_jump_cloud, spr_mario_jump_raccoon, spr_mario_jump_cat ];
+gp_sprites = [ spr_mario_gp_small, spr_mario_gp_super, spr_mario_gp_fire, spr_mario_gp_boomerang, spr_mario_gp_cloud, spr_mario_gp_raccoon, spr_mario_gp_cat ];
+spin_sprites = [ spr_mario_spin_small, spr_mario_spin_super, spr_mario_spin_fire, spr_mario_spin_boomerang, spr_mario_spin_cloud, spr_mario_spin_raccoon, spr_mario_spin_cat ];
+crouch_sprites = [ spr_mario_crouch_small, spr_mario_crouch_super, spr_mario_crouch_fire, spr_mario_crouch_boomerang, spr_mario_crouch_cloud, spr_mario_crouch_raccoon, spr_mario_crouch_cat ];
+power_sprites = [ spr_mario_crouch_small, spr_mario_crouch_super, spr_mario_power_fire, spr_mario_power_boomerang, spr_mario_crouch_cloud, spr_mario_power_raccoon, spr_mario_power_cat ];
 
 check_controls = function () {
 	jumpControl = keyboard_check_pressed(vk_space) || keyboard_check_pressed(ord("W"));
@@ -119,9 +122,27 @@ apply_walk = function() {
 		x += velocityX;
 	}
 	else {
+        if powerUp == "Cat" && !check_ground_at(x, y + 8) && (leftControl || rightControl) {
+            climbing = true;
+        }
+        
 		velocityX = 0;
 		wallOverpowerJoyX = 0;
 	}
+}
+
+apply_climb = function() {
+    if check_ground_at(x, y + 8) || !check_ground_at(x + 8 * facingDir, y) || powerControl {
+        climbing = false;
+        return;
+    }
+    else {
+        climbControl = crouchControl - jumpHoldControl;
+        
+        if !check_ground_at(x, y + climbSpeed * climbControl) {
+            y += climbControl * climbSpeed;
+        }
+    }
 }
 
 apply_gravity = function() {
@@ -340,6 +361,11 @@ check_ground_at = function(cx, cy) {
 	!place_meeting(x, y, obj_simple_enemy) && 
 	instance_place(x, y + 8, obj_simple_enemy).dying == false {
         if instance_place(x, y + 8, obj_simple_enemy).spiky {
+            if diveOverpowerJoyX != 0 && powerUp == "Cat" {
+                instance_place(x, y + 8, obj_simple_enemy).kill_fall();
+                return;
+            }
+            
             take_damage();
             return;
         }
@@ -357,7 +383,12 @@ check_ground_at = function(cx, cy) {
 	else if place_meeting(x, y, obj_simple_enemy) && 
 	instance_place(x, y, obj_simple_enemy).dying == false
 	&& iFrames = 0 {
-		take_damage();
+        if diveOverpowerJoyX != 0 && powerUp == "Cat" {
+            instance_place(x, y, obj_simple_enemy).kill_fall();
+        }
+        else {
+            take_damage();
+        }
 	}
 	
 	return false;
@@ -401,6 +432,17 @@ create_star_effect = function() {
 }
 
 use_power = function() {
+    if attackFrame < 4 {
+        if powerUp == "Raccoon" {
+            raccoon_attack();
+        }
+    }
+    if attackFrame < 4 {
+        if powerUp == "Cat" {
+            cat_attack();
+        }
+    }
+    
 	if powerCooldown > 0 || !powerControl {
 		powerCooldown--;
 		return;
@@ -420,6 +462,12 @@ use_power = function() {
 			boomerang.throw_start();
 		}
 		break;
+    case "Raccoon":
+        powerCooldown = 30;
+        attackFrame = 0;
+    case "Cat":
+        powerCooldown = 30;
+        attackFrame = 0;
 	default:
 		break;
 	}
@@ -461,6 +509,12 @@ pick_up_power_up = function() {
 			powerUp = "Cloud";
             
 			break;
+		case "Raccoon Leaf":
+			powerUp = "Raccoon";
+			break;
+		case "Super Bell":
+			powerUp = "Cat";
+			break;
 		default:
 			break;
 		}
@@ -473,12 +527,71 @@ pick_up_power_up = function() {
 	}
 }
 
+raccoon_attack = function() {
+    raccoon_range = 16;
+    for (i = 0; i < array_length(breakable_terrain); i++) {
+		if place_meeting(x - raccoon_range, y, breakable_terrain[i]) {
+			instance_destroy(instance_place(x - raccoon_range, y, breakable_terrain[i]));
+		}
+        
+		if place_meeting(x + raccoon_range, y, breakable_terrain[i]) {
+			instance_destroy(instance_place(x + raccoon_range, y, breakable_terrain[i]));
+		}
+	};
+    
+    if place_meeting(x - raccoon_range, y, obj_simple_enemy) {
+        instance_place(x - raccoon_range, y, obj_simple_enemy).kill_fall();
+    }
+    
+    if place_meeting(x + raccoon_range, y, obj_simple_enemy) {
+        instance_place(x + raccoon_range, y, obj_simple_enemy).kill_fall();
+    }
+    
+    if place_meeting(x - raccoon_range, y, obj_question_block) {
+		instance_place(x - raccoon_range, y, obj_question_block).get_hit_below();
+	}
+    
+    if place_meeting(x + raccoon_range, y, obj_question_block) {
+		instance_place(x + raccoon_range, y, obj_question_block).get_hit_below();
+	}
+}
+
+cat_attack = function() {
+    cat_range = 16;
+    for (i = 0; i < array_length(breakable_terrain); i++) {
+		if place_meeting(x + cat_range * facingDir, y, breakable_terrain[i]) {
+			instance_destroy(instance_place(x + cat_range * facingDir, y, breakable_terrain[i]));
+		}
+	};
+    
+    if place_meeting(x + cat_range * facingDir, y, obj_simple_enemy) {
+        instance_place(x + cat_range * facingDir, y, obj_simple_enemy).kill_fall();
+    }
+    
+    if place_meeting(x + cat_range * facingDir, y, obj_question_block) {
+		instance_place(x + cat_range * facingDir, y, obj_question_block).get_hit_below();
+	}
+}
+
 animate = function() {
 	image_xscale = facingDir * 2;
 	image_yscale = 2;
 	
     if !alive {
         sprite_index = spr_mario_die;
+    }
+	else if attackFrame < 4 {
+		sprite_index = power_sprites[array_get_index(power_ups, powerUp)];
+		image_index = floor(attackFrame);
+		attackFrame += .2;
+	}
+    else if climbing {
+        if jumpHoldControl || crouchControl {
+            sprite_index = spr_mario_climb_cat;
+        }
+        else {
+            sprite_index = spr_mario_stand_wall_cat;
+        }
     }
 	else if powerCooldown > 25 {
 		sprite_index = power_sprites[array_get_index(power_ups, powerUp)];
@@ -496,6 +609,11 @@ animate = function() {
 		sprite_index = crouch_sprites[array_get_index(power_ups, powerUp)];
 	}
 	else if gpAirStall != 0 || diveOverpowerJoyX != 0 {
+        if diveOverpowerJoyX != 0 && powerUp == "Cat" {
+            sprite_index = power_sprites[array_get_index(power_ups, powerUp)];
+            image_index = 2;
+            return;
+        }
 		sprite_index = gp_sprites[array_get_index(power_ups, powerUp)];
 	}
 	else if !check_ground_at(x, y + 8) {

@@ -3,7 +3,7 @@ velocityX = 0;
 velocityY = 0;
 terminalFallSpeed = 7;
 
-still_items = [ "Fire Flower", "Boomerang Flower", "Cloud Flower" ];
+still_items = [ "Fire Flower", "Boomerang Flower", "Cloud Flower", "Raccoon Leaf", "Super Bell" ];
 
 poppingOut = "Up";
 
@@ -77,6 +77,12 @@ animate = function() {
 			break;
 		case "Cloud Flower":
 			sprite_index = spr_power_cloud_flower;
+			break;
+		case "Raccoon Leaf":
+			sprite_index = spr_power_raccoon_leaf;
+			break;
+		case "Super Bell":
+			sprite_index = spr_power_super_bell;
 			break;
 		default:
 			show_debug_message(itemType);

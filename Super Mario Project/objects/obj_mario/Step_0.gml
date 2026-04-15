@@ -18,7 +18,13 @@ if !obj_game_manager.playable {
 }
 
 check_controls();
-apply_gravity();
-apply_walk();
+
+if climbing {
+    apply_climb();
+}
+else {
+    apply_gravity();
+    apply_walk();
+}
 pick_up_power_up();
 use_power();
