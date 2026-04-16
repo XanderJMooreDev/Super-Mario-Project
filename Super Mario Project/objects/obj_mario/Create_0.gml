@@ -35,7 +35,7 @@ gpStrength = 14;
 
 hasAerialSpun = false;
 
-collideable_terrain = [ layer_tilemap_get_id("Tiles"), obj_cloud_platform,
+collideable_terrain = [ layer_tilemap_get_id("Tiles_Grass"), obj_cloud_platform,
 obj_chain_chomp_stump ];
 breakable_terrain = [ obj_breakable_block ];
 
