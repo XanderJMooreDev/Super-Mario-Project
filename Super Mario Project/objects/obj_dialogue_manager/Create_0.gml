@@ -1,9 +1,13 @@
+dialogueOption = -1;
+dialogue = [ "No message set" ];
+
 display_dialogue = function(dialogue_array) {
-    obj_game_manager.playable = false;
     
-    for (i = 0; i < array_length(dialogue_array); i++) {
-        
+    dialogue = dialogue_array;
+    dialogueOption++;
+    
+    if dialogueOption >= 0 {
+        obj_game_manager.playable = false;
+        show_debug_message(dialogue[dialogueOption]);
     }
-    
-    obj_game_manager.playable = true;
 }
