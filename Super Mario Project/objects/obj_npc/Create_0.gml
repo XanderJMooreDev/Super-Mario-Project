@@ -1,5 +1,9 @@
 npc_array = [ "Toadsworth" ];
 
+npc_sprites = [ spr_npc_toadsworth ];
+
+sprite_index = npc_sprites[array_get_index(npc_array, npc_name)];
+
 talked_to = false;
 
 dialogue_toadsworth_1 = [ "Mario! Thank goodness you're here!", 

@@ -1,3 +1,8 @@
+gpu_set_texfilter(false);
+
+respawnX = 0;
+respawnY = 0;
+
 playable = true;
 
 global.cloud_platforms = ds_queue_create();

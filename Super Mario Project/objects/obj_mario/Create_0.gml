@@ -35,8 +35,10 @@ gpStrength = 14;
 
 hasAerialSpun = false;
 
-collideable_terrain = [ layer_tilemap_get_id("Tiles_Grass"), obj_cloud_platform,
-obj_chain_chomp_stump ];
+collideable_terrain = [ layer_tilemap_get_id("Tiles_Grass"),
+layer_tilemap_get_id("Tiles_Cave"),
+layer_tilemap_get_id("Tiles_Castle"), 
+obj_cloud_platform, obj_chain_chomp_stump ];
 breakable_terrain = [ obj_breakable_block ];
 
 power_ups = [ "Small", "Super", "Fire", "Boomerang", "Cloud", "Raccoon", "Cat" ];
@@ -648,7 +650,10 @@ transition_power = function(pre, post) {
 		obj_game_manager.playable = false;
 	}
 	else if powerTransition = 60 {
-		obj_game_manager.playable = true;
+        if alive { 
+            obj_game_manager.playable = true;
+        }
+        
 		lastPower = post;
 	}
 	else if powerTransition < 60 {
@@ -667,4 +672,6 @@ transition_power = function(pre, post) {
 die = function() {
 	alive = false;
 	obj_game_manager.playable = false;
+    
+    alarm[1] = 300;
 }

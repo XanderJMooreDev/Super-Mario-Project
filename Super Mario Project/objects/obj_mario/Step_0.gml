@@ -11,6 +11,8 @@ if !alive {
     }
     
     y -= deathHop;
+    
+    return;
 }
 
 if !obj_game_manager.playable {
@@ -26,5 +28,6 @@ else {
     apply_gravity();
     apply_walk();
 }
+
 pick_up_power_up();
 use_power();
