@@ -11,13 +11,13 @@ switch open_dir {
     case "Up":
         image_angle = 0;
         break;
-    case "Right":
+    case "Left":
         image_angle = 90;
         break;
     case "Down":
         image_angle = 180;
         break;
-    case "Left":
+    case "Right":
         image_angle = 270;
         break;
     default:

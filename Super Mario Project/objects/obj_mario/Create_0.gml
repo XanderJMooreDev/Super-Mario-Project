@@ -286,6 +286,21 @@ check_ground_at = function(cx, cy) {
                     obj_game_manager.playable = false;
                     warping = 1;
                 }
+                else if pipe.open_dir == "Down" && place_meeting(x, y - 8, pipe) && jumpHoldControl && abs(pipe.x - x) < 16 {
+                    x = pipe.x;
+                    obj_game_manager.playable = false;
+                    warping = 1;
+                }
+                else if pipe.open_dir == "Right" && place_meeting(x - 8, y, pipe) && leftControl && y <= pipe.y + 8 {
+                    y = pipe.y;
+                    obj_game_manager.playable = false;
+                    warping = 1;
+                }
+                else if pipe.open_dir == "Left" && place_meeting(x + 8, y, pipe) && leftControl && y <= pipe.y + 8 {
+                    y = pipe.y;
+                    obj_game_manager.playable = false;
+                    warping = 1;
+                }
             }
             
 			return true;
@@ -684,4 +699,73 @@ die = function() {
 	obj_game_manager.playable = false;
     
     alarm[1] = 300;
+}
+
+enter_pipe = function(direction) {
+    switch direction {
+        case "Up":
+            xShift = 0;
+            yShift = 8;
+            break;
+        case "Down":
+            xShift = 0;
+            yShift = -8;
+            break;
+        case "Right":
+            xShift = -8;
+            yShift = 0;
+            break;
+        case "Left":
+            xShift = 8;
+            yShift = 0;
+            break;
+        default:
+            show_debug_message("Improper pipe entrance");
+            break;
+    }
+    
+    if place_meeting(x + xShift, y + yShift, obj_warp_pipe) {
+        if direction == "Up" {
+            if y < instance_place(x, y + yShift, obj_warp_pipe).y {
+                y += 2;
+                return 1;
+            }
+        }
+        else if direction == "Down" {
+            if y > instance_place(x, y + yShift, obj_warp_pipe).y + yShift {
+                y -= 2;
+                return 1;
+            }
+        }
+        else if direction == "Left" {
+            if x < instance_place(x + xShift, y, obj_warp_pipe).x + xShift {
+                x += 2;
+                return 1;
+            }
+        }
+        else if direction == "Right" {
+            if x > instance_place(x + xShift, y, obj_warp_pipe).x {
+                x -= 2;
+                return 1;
+            }
+        }
+        
+        find_pipemate(xShift, yShift);
+    }
+}
+
+find_pipemate = function(xShift, yShift) {
+    pipemate = instance_place(x + xShift, y + yShift, obj_warp_pipe).find_mate();
+            
+    if pipemate != noone {
+        warping = 2;
+        
+        x = pipemate.x;
+        y = pipemate.y;
+        camera_set_view_pos(obj_camera_manager.camera, x, y);
+        return 1;
+    }
+    else {
+        return 0;
+    }
 }
