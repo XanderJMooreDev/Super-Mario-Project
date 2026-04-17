@@ -22,6 +22,7 @@ iFrames = 0;
 
 crouching = false;
 climbing = false;
+warping = 0;
 
 dove = false;
 
@@ -38,7 +39,7 @@ hasAerialSpun = false;
 collideable_terrain = [ layer_tilemap_get_id("Tiles_Grass"),
 layer_tilemap_get_id("Tiles_Cave"),
 layer_tilemap_get_id("Tiles_Castle"), 
-obj_cloud_platform, obj_chain_chomp_stump ];
+obj_cloud_platform, obj_chain_chomp_stump, obj_warp_pipe ];
 breakable_terrain = [ obj_breakable_block ];
 
 power_ups = [ "Small", "Super", "Fire", "Boomerang", "Cloud", "Raccoon", "Cat" ];
@@ -276,6 +277,15 @@ check_ground_at = function(cx, cy) {
                 instance_destroy(instance_place(cx, cy, obj_cloud_platform));
                 
                 obj_game_manager.cloud_platforms++;
+            }
+            else if place_meeting(cx, cy, obj_warp_pipe) {
+                pipe = instance_place(cx, cy, obj_warp_pipe);
+                
+                if pipe.open_dir == "Up" && place_meeting(x, y + 8, pipe) && crouchControl && abs(pipe.x - x) < 16 {
+                    x = pipe.x;
+                    obj_game_manager.playable = false;
+                    warping = 1;
+                }
             }
             
 			return true;
@@ -650,7 +660,7 @@ transition_power = function(pre, post) {
 		obj_game_manager.playable = false;
 	}
 	else if powerTransition = 60 {
-        if alive { 
+        if alive {
             obj_game_manager.playable = true;
         }
         
