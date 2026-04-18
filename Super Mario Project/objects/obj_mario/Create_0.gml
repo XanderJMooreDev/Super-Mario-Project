@@ -24,6 +24,8 @@ crouching = false;
 climbing = false;
 warping = 0;
 
+pipeDirection = "Up";
+
 dove = false;
 
 diveOverpowerJoyX = 0;
@@ -40,7 +42,10 @@ collideable_terrain = [ layer_tilemap_get_id("Tiles_Grass"),
 layer_tilemap_get_id("Tiles_Cave"),
 layer_tilemap_get_id("Tiles_Castle"), 
 obj_cloud_platform, obj_chain_chomp_stump, obj_warp_pipe ];
+
 breakable_terrain = [ obj_breakable_block ];
+
+death_zones = [];
 
 power_ups = [ "Small", "Super", "Fire", "Boomerang", "Cloud", "Raccoon", "Cat" ];
 stand_sprites = [ spr_mario_stand_small, spr_mario_stand_super, spr_mario_stand_fire, spr_mario_stand_boomerang, spr_mario_stand_cloud, spr_mario_stand_raccoon, spr_mario_stand_cat];
@@ -270,6 +275,9 @@ apply_gravity = function() {
 }
 
 check_ground_at = function(cx, cy) { 
+    for (i = 0; i < array_length(death_zones); i++) {
+		die();
+	};
     
 	for (i = 0; i < array_length(collideable_terrain); i++) {
 		if place_meeting(cx, cy, collideable_terrain[i]) {
@@ -281,25 +289,35 @@ check_ground_at = function(cx, cy) {
             else if place_meeting(cx, cy, obj_warp_pipe) {
                 pipe = instance_place(cx, cy, obj_warp_pipe);
                 
+                pipeDirection = pipe.open_dir;
+                
                 if pipe.open_dir == "Up" && place_meeting(x, y + 8, pipe) && crouchControl && abs(pipe.x - x) < 16 {
                     x = pipe.x;
                     obj_game_manager.playable = false;
                     warping = 1;
+                    velocityX = 0;
+                    velocityY = 0;
                 }
                 else if pipe.open_dir == "Down" && place_meeting(x, y - 8, pipe) && jumpHoldControl && abs(pipe.x - x) < 16 {
                     x = pipe.x;
                     obj_game_manager.playable = false;
                     warping = 1;
+                    velocityX = 0;
+                    velocityY = 0;
                 }
                 else if pipe.open_dir == "Right" && place_meeting(x - 8, y, pipe) && leftControl && y <= pipe.y + 8 {
-                    y = pipe.y;
+                    y = pipe.y - 8;
                     obj_game_manager.playable = false;
                     warping = 1;
+                    velocityX = 0;
+                    velocityY = 0;
                 }
-                else if pipe.open_dir == "Left" && place_meeting(x + 8, y, pipe) && leftControl && y <= pipe.y + 8 {
-                    y = pipe.y;
+                else if pipe.open_dir == "Left" && place_meeting(x + 8, y, pipe) && rightControl && y <= pipe.y + 8 {
+                    y = pipe.y - 8;
                     obj_game_manager.playable = false;
                     warping = 1;
+                    velocityX = 0;
+                    velocityY = 0;
                 }
             }
             
@@ -607,6 +625,9 @@ animate = function() {
     if !alive {
         sprite_index = spr_mario_die;
     }
+    else if warping {
+		sprite_index = stand_sprites[array_get_index(power_ups, powerUp)];
+	}
 	else if attackFrame < 4 {
 		sprite_index = power_sprites[array_get_index(power_ups, powerUp)];
 		image_index = floor(attackFrame);
@@ -762,6 +783,12 @@ find_pipemate = function(xShift, yShift) {
         
         x = pipemate.x;
         y = pipemate.y;
+        
+        if pipemate.open_dir == "Left" ||
+            pipemate.open_dir == "Right" {
+            y -= 8;
+        }
+        
         camera_set_view_pos(obj_camera_manager.camera, x, y);
         return 1;
     }

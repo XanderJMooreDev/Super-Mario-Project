@@ -1,14 +1,7 @@
+animate();
+
 if warping == 1 {
-    if enter_pipe("Up") == 1 {
-        return;
-    }
-    if enter_pipe("Down") == 1 {
-        return;
-    }
-    if enter_pipe("Right") == 1 {
-        return;
-    }
-    if enter_pipe("Left") == 1 {
+    if enter_pipe(pipeDirection) == 1 {
         return;
     }
 }
@@ -34,8 +27,6 @@ else if warping == 2 {
     warping = 0;
     return;
 }
-
-animate();
 
 if !alive {
     if deathHop == 300 {
