@@ -445,9 +445,9 @@ take_damage = function() {
     }
     
     lastPower = powerUp;
-    powerTransition = 0;
     
     if powerUp == "Small" {
+            powerTransition = 31;
 			die();
 		}
 		else if powerUp = "Super" {
@@ -692,10 +692,10 @@ animate = function() {
 }
 
 transition_power = function(pre, post) {
-	if powerTransition = 0 {
+	if powerTransition == 0 {
 		obj_game_manager.playable = false;
 	}
-	else if powerTransition = 60 {
+	else if powerTransition == 60 {
         if alive {
             obj_game_manager.playable = true;
         }
@@ -787,9 +787,10 @@ find_pipemate = function(xShift, yShift) {
         if pipemate.open_dir == "Left" ||
             pipemate.open_dir == "Right" {
             y -= 8;
-        }
-        
-        camera_set_view_pos(obj_camera_manager.camera, x, y);
+        }camera = obj_camera_manager.camera;
+        camera_set_view_pos(camera, 
+        clamp(x - camera_get_view_width(camera) / 2, 0, room_width - camera_get_view_width(camera)), 
+        clamp(y - camera_get_view_height(camera) / 2, 0, room_height - camera_get_view_height(camera)));
         return 1;
     }
     else {
