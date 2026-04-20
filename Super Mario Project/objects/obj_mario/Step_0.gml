@@ -1,5 +1,3 @@
-show_debug_message(warping);
-
 animate();
 
 if warping == 1 {

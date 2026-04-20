@@ -150,6 +150,7 @@
     {"id":{"name":"spr_mario_wall_super","path":"sprites/spr_mario_wall_super/spr_mario_wall_super.yy",},},
     {"id":{"name":"spr_npc_captain_toad","path":"sprites/spr_npc_captain_toad/spr_npc_captain_toad.yy",},},
     {"id":{"name":"spr_npc_toad_blue","path":"sprites/spr_npc_toad_blue/spr_npc_toad_blue.yy",},},
+    {"id":{"name":"spr_npc_toad_green_fire","path":"sprites/spr_npc_toad_green_fire/spr_npc_toad_green_fire.yy",},},
     {"id":{"name":"spr_npc_toad_green","path":"sprites/spr_npc_toad_green/spr_npc_toad_green.yy",},},
     {"id":{"name":"spr_npc_toad_purple","path":"sprites/spr_npc_toad_purple/spr_npc_toad_purple.yy",},},
     {"id":{"name":"spr_npc_toad_red","path":"sprites/spr_npc_toad_red/spr_npc_toad_red.yy",},},
