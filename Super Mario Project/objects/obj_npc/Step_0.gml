@@ -1,11 +1,11 @@
-if obj_game_manager.playable {
+if obj_game_manager.playable && !hidden_until_saved {
     if (place_meeting(x - 32, y, obj_mario) || place_meeting(x + 32, y, obj_mario)) && obj_control_manager.textControl {
         if talked_to {
-            obj_dialogue_manager.display_dialogue(npc_repeat_interaction_dialogues[array_get_index(npc_array, npc_name)]);
+            obj_dialogue_manager.display_dialogue(npc_repeat_interaction_dialogues[array_get_index(npc_array, npc_name)], self);
         }
         else {
             talked_to = true;
-            obj_dialogue_manager.display_dialogue(npc_first_interaction_dialogues[array_get_index(npc_array, npc_name)]);
+            obj_dialogue_manager.display_dialogue(npc_first_interaction_dialogues[array_get_index(npc_array, npc_name)], self);
         }
     }
     
@@ -16,3 +16,5 @@ if obj_game_manager.playable {
         image_xscale = -1;
     }
 }
+    
+image_alpha = !hidden_until_saved;

@@ -77,6 +77,9 @@
     {"name":"inst_CA160C4","path":"rooms/room_temp/room_temp.yy",},
     {"name":"inst_4E309899","path":"rooms/room_temp/room_temp.yy",},
     {"name":"inst_39D0A716","path":"rooms/room_temp/room_temp.yy",},
+    {"name":"inst_C8FDD7D","path":"rooms/room_temp/room_temp.yy",},
+    {"name":"inst_37B418D2","path":"rooms/room_temp/room_temp.yy",},
+    {"name":"inst_46933A7","path":"rooms/room_temp/room_temp.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -197,6 +200,12 @@
             {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_simple_enemy","path":"objects/obj_simple_enemy/obj_simple_enemy.yy",},"propertyId":{"name":"enemyType","path":"objects/obj_simple_enemy/obj_simple_enemy.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"Piranha Plant",},
           ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":800.0,"y":4128.0,},
         {"$GMRInstance":"v4","%Name":"inst_39D0A716","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_39D0A716","objectId":{"name":"obj_checkpoint","path":"objects/obj_checkpoint/obj_checkpoint.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":160.0,"y":3808.0,},
+        {"$GMRInstance":"v4","%Name":"inst_C8FDD7D","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_C8FDD7D","objectId":{"name":"obj_saveable_citizen","path":"objects/obj_saveable_citizen/obj_saveable_citizen.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":9504.0,"y":192.0,},
+        {"$GMRInstance":"v4","%Name":"inst_37B418D2","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_37B418D2","objectId":{"name":"obj_npc","path":"objects/obj_npc/obj_npc.yy",},"properties":[
+            {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_npc","path":"objects/obj_npc/obj_npc.yy",},"propertyId":{"name":"npc_name","path":"objects/obj_npc/obj_npc.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"Toad1",},
+            {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_npc","path":"objects/obj_npc/obj_npc.yy",},"propertyId":{"name":"hidden_until_saved","path":"objects/obj_npc/obj_npc.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"True",},
+          ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":12064.0,"y":2112.0,},
+        {"$GMRInstance":"v4","%Name":"inst_46933A7","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_46933A7","objectId":{"name":"obj_collect_manager","path":"objects/obj_collect_manager/obj_collect_manager.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":11520.0,"y":1088.0,},
       ],"layers":[],"name":"Instances","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRInstanceLayer":"","%Name":"Effects","depth":200,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[],"layers":[],"name":"Effects","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRInstanceLayer":"","%Name":"Background_Instances","depth":300,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[

@@ -1,12 +1,12 @@
 {
   "$GMObject":"",
-  "%Name":"obj_npc",
+  "%Name":"obj_saveable_citizen",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_npc",
+  "name":"obj_saveable_citizen",
   "overriddenProperties":[],
   "parent":{
     "name":"Elements",
@@ -27,8 +27,7 @@
   "physicsShapePoints":[],
   "physicsStartAwake":true,
   "properties":[
-    {"$GMObjectProperty":"v2","%Name":"npc_name","filters":[],"listItems":[],"multiselect":false,"name":"npc_name","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"Toadsworth","varType":2,},
-    {"$GMObjectProperty":"v2","%Name":"hidden_until_saved","filters":[],"listItems":[],"multiselect":false,"name":"hidden_until_saved","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"False","varType":3,},
+    {"$GMObjectProperty":"v2","%Name":"saveable_name","filters":[],"listItems":[],"multiselect":false,"name":"saveable_name","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"Toad1","varType":2,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

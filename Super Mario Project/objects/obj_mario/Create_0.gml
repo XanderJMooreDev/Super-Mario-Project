@@ -628,6 +628,9 @@ animate = function() {
     else if warping {
 		sprite_index = stand_sprites[array_get_index(power_ups, powerUp)];
 	}
+    else if !obj_game_manager.playable && global.collecting {
+		sprite_index = jump_sprites[array_get_index(power_ups, powerUp)];
+    }
 	else if attackFrame < 4 {
 		sprite_index = power_sprites[array_get_index(power_ups, powerUp)];
 		image_index = floor(attackFrame);

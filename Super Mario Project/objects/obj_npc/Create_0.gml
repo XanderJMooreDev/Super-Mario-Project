@@ -1,6 +1,6 @@
-npc_array = [ "Toadsworth" ];
+npc_array = [ "Toadsworth", "Toad1" ];
 
-npc_sprites = [ spr_npc_toadsworth ];
+npc_sprites = [ spr_npc_toadsworth, spr_npc_toad_red ];
 
 sprite_index = npc_sprites[array_get_index(npc_array, npc_name)];
 
@@ -18,5 +18,8 @@ dialogue_toadsworth_2 = [ "The castle can't survive long without our Toads to pe
 "If you're struggling to reach someplace, try using some of the power-ups all across the kingdom!",
 "They give you special abilities, and some will even help you reach new heights!" ];
 
-npc_first_interaction_dialogues = [ dialogue_toadsworth_1 ];
-npc_repeat_interaction_dialogues = [ dialogue_toadsworth_2 ];
+dialogue_toad1 = [ "I oversee this cave. It used to be a storage area, but clearly, we have nothing left to store here.",
+"Was it not enough to take our Princess?" ];
+
+npc_first_interaction_dialogues = [ dialogue_toadsworth_1, dialogue_toad1 ];
+npc_repeat_interaction_dialogues = [ dialogue_toadsworth_2, dialogue_toad1 ];
