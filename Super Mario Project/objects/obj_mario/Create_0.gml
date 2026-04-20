@@ -629,7 +629,13 @@ animate = function() {
 		sprite_index = stand_sprites[array_get_index(power_ups, powerUp)];
 	}
     else if !obj_game_manager.playable && global.collecting {
-		sprite_index = jump_sprites[array_get_index(power_ups, powerUp)];
+        if obj_collect_manager.alarm[0] > 80 {
+            sprite_index = spin_sprites[array_get_index(power_ups, powerUp)];
+            image_index = (obj_collect_manager.alarm[0] - 80) / 6;
+        }
+        else { 
+            sprite_index = jump_sprites[array_get_index(power_ups, powerUp)];
+        }
     }
 	else if attackFrame < 4 {
 		sprite_index = power_sprites[array_get_index(power_ups, powerUp)];
