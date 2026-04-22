@@ -84,6 +84,9 @@ animate = function() {
 		case "Super Bell":
 			sprite_index = spr_power_super_bell;
 			break;
+		case "Coin":
+			sprite_index = spr_coin;
+			break;
 		default:
 			show_debug_message(itemType);
 	}

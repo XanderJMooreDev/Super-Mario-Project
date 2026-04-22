@@ -1,6 +1,6 @@
-npc_array = [ "Toadsworth", "Toad1", "Toad2", "Toad3" ];
+npc_array = [ "Toadsworth", "Toad1", "Toad2", "Toad3", "Toad4" ];
 
-npc_sprites = [ spr_npc_toadsworth, spr_npc_toad_red, spr_npc_toad_green, spr_npc_toad_red ];
+npc_sprites = [ spr_npc_toadsworth, spr_npc_toad_red, spr_npc_toad_green, spr_npc_toad_red ,spr_npc_toad_purple ];
 
 sprite_index = npc_sprites[array_get_index(npc_array, npc_name)];
 
@@ -27,5 +27,8 @@ dialogue_toad2 = [ "The structural integrity of the castle is compromised. It's 
 dialogue_toad3 = [ "No Princess here, that's for sure. Are you trying to save her?",
 "I hope Bowser Jr. isn't too much of a problem, but hey, you're Mario!" ];
 
-npc_first_interaction_dialogues = [ dialogue_toadsworth_1, dialogue_toad1, dialogue_toad2, dialogue_toad3 ];
-npc_repeat_interaction_dialogues = [ dialogue_toadsworth_2, dialogue_toad1, dialogue_toad2, dialogue_toad3 ];
+dialogue_toad4 = [ "Toadsworth is having us specialty-less Toads keep watch for invaders.",
+"Not sure why when that Petey Piranha guy is already in our castle." ];
+
+npc_first_interaction_dialogues = [ dialogue_toadsworth_1, dialogue_toad1, dialogue_toad2, dialogue_toad3, dialogue_toad4 ];
+npc_repeat_interaction_dialogues = [ dialogue_toadsworth_2, dialogue_toad1, dialogue_toad2, dialogue_toad3, dialogue_toad4 ];

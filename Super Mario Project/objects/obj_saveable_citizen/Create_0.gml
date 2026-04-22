@@ -1,6 +1,6 @@
-saveable_array = [ "Toad1", "Toad2", "Toad3" ];
+saveable_array = [ "Toad1", "Toad2", "Toad3", "Toad4" ];
 
-saveable_sprites = [ spr_npc_toad_red, spr_npc_toad_yellow, spr_npc_toad_red ];
+saveable_sprites = [ spr_npc_toad_red, spr_npc_toad_yellow, spr_npc_toad_red, spr_npc_toad_purple ];
 
 sprite_index = saveable_sprites[array_get_index(saveable_array, saveable_name)];
 
@@ -19,7 +19,11 @@ dialogue_toad3 = [ "Thank you Mario!",
 "At least, I think. I got teleported here before I could figure out what was happening!",
 "I'd better get back and see what's going on with the castle!" ];
 
-saveable_interaction_dialogues = [ dialogue_toad1, dialogue_toad2, dialogue_toad3 ];
+dialogue_toad4 = [ "Yikes! I couldn't get out of these blocks!",
+"This area is pretty neat, though. Far away from the pressures of the kingdom...",
+"Well, it was nice while it lasted. Back to serving the monarchy." ];
+
+saveable_interaction_dialogues = [ dialogue_toad1, dialogue_toad2, dialogue_toad3, dialogue_toad4 ];
 
 save = function() {
     effect_create_layer("Effects", ef_smoke, x, y, 5, c_white);
