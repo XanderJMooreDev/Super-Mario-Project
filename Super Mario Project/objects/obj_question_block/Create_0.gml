@@ -3,6 +3,9 @@ hit = false;
 if infinite {
     sprite_index = spr_infinite_question_block;
 }
+else if brick_style {
+    sprite_index = spr_brick_block;
+}
 else {
     sprite_index = spr_question_block;
 }

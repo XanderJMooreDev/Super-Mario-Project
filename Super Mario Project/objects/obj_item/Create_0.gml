@@ -7,6 +7,10 @@ still_items = [ "Fire Flower", "Boomerang Flower", "Cloud Flower", "Raccoon Leaf
 
 poppingOut = "Up";
 
+if itemType == "Coin" {
+    global.coins++;
+}
+
 sit_still = function() {
 	
 	for (i = 0; i < array_length(obj_mario.collideable_terrain); i++) {
