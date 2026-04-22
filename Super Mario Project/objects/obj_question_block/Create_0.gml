@@ -7,10 +7,13 @@ else {
     sprite_index = spr_question_block;
 }
 
+image_alpha = !invisible;
+
 get_hit_below = function() {
 	if !hit {
         if !infinite {
        		sprite_index = spr_empty_block;
+            image_alpha = 1;
        		hit = true;
         }
 		
@@ -24,6 +27,7 @@ get_hit_above = function() {
 	if !hit {
 		if !infinite {
        		sprite_index = spr_empty_block;
+            image_alpha = 1;
        		hit = true;
         }
 		

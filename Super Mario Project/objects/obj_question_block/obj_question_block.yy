@@ -28,6 +28,7 @@
   "properties":[
     {"$GMObjectProperty":"v2","%Name":"itemContained","filters":[],"listItems":[],"multiselect":false,"name":"itemContained","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"Super Mushroom","varType":2,},
     {"$GMObjectProperty":"v2","%Name":"infinite","filters":[],"listItems":[],"multiselect":false,"name":"infinite","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"False","varType":3,},
+    {"$GMObjectProperty":"v2","%Name":"invisible","filters":[],"listItems":[],"multiselect":false,"name":"invisible","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"False","varType":3,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
