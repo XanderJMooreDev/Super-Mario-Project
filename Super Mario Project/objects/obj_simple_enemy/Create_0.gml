@@ -46,12 +46,16 @@ assign_properties = function() {
     }
 }
 
+offscreen = function() {
+    
+}
+
 walk = function() { 
     if iFrames > 0 {
         iFrames--;
     }
     
-    if standStill {
+    if standStill || wait_until_onscreen && offscreen() {
         sit_still();
         return;
     }

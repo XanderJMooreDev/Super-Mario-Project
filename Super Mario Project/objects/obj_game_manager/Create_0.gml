@@ -1,5 +1,7 @@
 gpu_set_texfilter(false);
 
+global.current_kingdom = 0;
+
 respawnX = 0;
 respawnY = 0;
 

@@ -38,10 +38,11 @@ gpStrength = 14;
 
 hasAerialSpun = false;
 
-collideable_terrain = [ layer_tilemap_get_id("Tiles_Grass"),
+collideable_terrain = [ obj_chain_chomp_stump, 
+layer_tilemap_get_id("Tiles_Grass"),
 layer_tilemap_get_id("Tiles_Cave"),
 layer_tilemap_get_id("Tiles_Castle"), 
-obj_cloud_platform, obj_chain_chomp_stump, obj_warp_pipe ];
+obj_cloud_platform, obj_warp_pipe ];
 
 breakable_terrain = [ obj_breakable_block ];
 

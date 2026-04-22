@@ -1,6 +1,6 @@
-npc_array = [ "Toadsworth", "Toad1" ];
+npc_array = [ "Toadsworth", "Toad1", "Toad2", "Toad3" ];
 
-npc_sprites = [ spr_npc_toadsworth, spr_npc_toad_red ];
+npc_sprites = [ spr_npc_toadsworth, spr_npc_toad_red, spr_npc_toad_green, spr_npc_toad_red ];
 
 sprite_index = npc_sprites[array_get_index(npc_array, npc_name)];
 
@@ -21,5 +21,11 @@ dialogue_toadsworth_2 = [ "The castle can't survive long without our Toads to pe
 dialogue_toad1 = [ "I oversee this cave. It used to be a storage area, but clearly, we have nothing left to store here.",
 "Was it not enough to take our Princess?" ];
 
-npc_first_interaction_dialogues = [ dialogue_toadsworth_1, dialogue_toad1 ];
-npc_repeat_interaction_dialogues = [ dialogue_toadsworth_2, dialogue_toad1 ];
+dialogue_toad2 = [ "The structural integrity of the castle is compromised. It's up to me to get it fixed up.",
+"It'll be tough without my tools, but I'm pretty headstrong." ];
+
+dialogue_toad3 = [ "No Princess here, that's for sure. Are you trying to save her?",
+"I hope Bowser Jr. isn't too much of a problem, but hey, you're Mario!" ];
+
+npc_first_interaction_dialogues = [ dialogue_toadsworth_1, dialogue_toad1, dialogue_toad2, dialogue_toad3 ];
+npc_repeat_interaction_dialogues = [ dialogue_toadsworth_2, dialogue_toad1, dialogue_toad2, dialogue_toad3 ];

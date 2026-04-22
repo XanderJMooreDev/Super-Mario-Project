@@ -38,7 +38,7 @@ sit_still = function() {
     
     if array_length(collideable_terrain) == 0 {
        array_copy(collideable_terrain, 0, obj_mario.collideable_terrain, 0, array_length(obj_mario.collideable_terrain));
-       array_delete(collideable_terrain, 2, 1);
+       array_delete(collideable_terrain, 0, 1);
     }
         
 	for (i = 0; i < array_length(collideable_terrain); i++) {
