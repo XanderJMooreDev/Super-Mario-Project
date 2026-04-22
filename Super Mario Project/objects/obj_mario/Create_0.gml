@@ -45,7 +45,7 @@ obj_cloud_platform, obj_chain_chomp_stump, obj_warp_pipe ];
 
 breakable_terrain = [ obj_breakable_block ];
 
-death_zones = [];
+death_zones = [ obj_death_zone ];
 
 power_ups = [ "Small", "Super", "Fire", "Boomerang", "Cloud", "Raccoon", "Cat" ];
 stand_sprites = [ spr_mario_stand_small, spr_mario_stand_super, spr_mario_stand_fire, spr_mario_stand_boomerang, spr_mario_stand_cloud, spr_mario_stand_raccoon, spr_mario_stand_cat];
@@ -276,7 +276,11 @@ apply_gravity = function() {
 
 check_ground_at = function(cx, cy) { 
     for (i = 0; i < array_length(death_zones); i++) {
-		die();
+		if place_meeting(cx, cy, death_zones[i]) {
+            die();
+            
+            y += 600;
+        }
 	};
     
 	for (i = 0; i < array_length(collideable_terrain); i++) {
@@ -727,6 +731,8 @@ transition_power = function(pre, post) {
 die = function() {
 	alive = false;
 	obj_game_manager.playable = false;
+    lastPower = "Small";
+    powerUp = "Small";
     
     alarm[1] = 300;
 }
