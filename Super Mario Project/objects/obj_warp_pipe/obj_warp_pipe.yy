@@ -28,6 +28,7 @@
   "properties":[
     {"$GMObjectProperty":"v2","%Name":"open_dir","filters":[],"listItems":[],"multiselect":false,"name":"open_dir","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"Up","varType":2,},
     {"$GMObjectProperty":"v2","%Name":"match_id","filters":[],"listItems":[],"multiselect":false,"name":"match_id","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"0","varType":1,},
+    {"$GMObjectProperty":"v2","%Name":"extension","filters":[],"listItems":[],"multiselect":false,"name":"extension","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"False","varType":3,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

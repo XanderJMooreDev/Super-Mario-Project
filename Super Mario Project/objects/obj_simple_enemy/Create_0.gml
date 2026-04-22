@@ -47,7 +47,13 @@ assign_properties = function() {
 }
 
 offscreen = function() {
-    
+    return !point_in_rectangle(x, y,
+    camera_get_view_x(obj_camera_manager.camera) - 50,
+    camera_get_view_y(obj_camera_manager.camera) - 50,
+    camera_get_view_x(obj_camera_manager.camera) +
+        camera_get_view_width(obj_camera_manager.camera) + 50,
+    camera_get_view_y(obj_camera_manager.camera) +
+        camera_get_view_height(obj_camera_manager.camera) + 50);
 }
 
 walk = function() { 
@@ -128,7 +134,12 @@ wobble = function() {
     }
     
 	if velocityX = 0 {
-		velocityX = walkSpeed;
+        if start_left {
+		  velocityX = -walkSpeed;
+        }
+        else {
+		  velocityX = walkSpeed;
+        }
 	}
 	
 	sit_still();

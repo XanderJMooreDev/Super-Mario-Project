@@ -41,7 +41,8 @@ hasAerialSpun = false;
 collideable_terrain = [ obj_chain_chomp_stump, 
 layer_tilemap_get_id("Tiles_Grass"),
 layer_tilemap_get_id("Tiles_Cave"),
-layer_tilemap_get_id("Tiles_Castle"), 
+layer_tilemap_get_id("Tiles_Castle"),
+layer_tilemap_get_id("Tiles_SMB1"), 
 obj_cloud_platform, obj_warp_pipe ];
 
 breakable_terrain = [ obj_breakable_block ];
@@ -291,8 +292,12 @@ check_ground_at = function(cx, cy) {
                 
                 obj_game_manager.cloud_platforms++;
             }
-            else if place_meeting(cx, cy, obj_warp_pipe) {
+            else if place_meeting(cx, cy, obj_warp_pipe) { 
                 pipe = instance_place(cx, cy, obj_warp_pipe);
+                
+                if pipe.match_id == -1 {
+                    return true;
+                }
                 
                 pipeDirection = pipe.open_dir;
                 

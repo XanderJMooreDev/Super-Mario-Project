@@ -1,3 +1,8 @@
+if extension {
+    match_id = -1;
+    image_index = 1;
+}
+
 find_mate = function() {
     for (i = 0; i < instance_number(obj_warp_pipe); i++) {
         if instance_find(obj_warp_pipe, i).match_id == match_id &&
