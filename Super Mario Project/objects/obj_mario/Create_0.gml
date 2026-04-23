@@ -9,6 +9,7 @@ climbSpeed = 6;
 
 spinFrame = 9;
 attackFrame = 9;
+flapFrame = 9;
 
 alive = true;
 deathHop = 300;
@@ -226,29 +227,38 @@ apply_gravity = function() {
 		}
 	}
 	
-	if jumpControl && !hasAerialSpun && wallOverpowerJoyX == 0 {
-		if !crouchControl {	
-			spinFrame = 0;
-			velocityY = -spinStrength;
-			hasAerialSpun = true;
-			
-			if powerUp == "Fire" {
-				fireball = instance_create_layer(x, y, "Instances", obj_player_fireball);
-				fireball.image_xscale = facingDir;
-			
-				fireball = instance_create_layer(x, y, "Instances", obj_player_fireball);
-				fireball.image_xscale = -facingDir;
-			}
-            else if powerUp == "Cloud" && obj_game_manager.cloud_platforms > 0 {
-                instance_create_layer(x, y + 52, "Instances", obj_cloud_platform);
+	if jumpControl && wallOverpowerJoyX == 0 {
+        if hasAerialSpun {
+            if powerUp == "Raccoon" {
+                velocityY = -1;
                 
-                for (i = 0; i < obj_game_manager.cloud_platforms; i++) {
-                    
-                }
+                flapFrame = 0;
             }
-		
-			create_star_effect();
-		}
+        }
+        else {
+      		if !crouchControl {	
+      			spinFrame = 0;
+      			velocityY = -spinStrength;
+      			hasAerialSpun = true;
+      			
+      			if powerUp == "Fire" {
+      				fireball = instance_create_layer(x, y, "Instances", obj_player_fireball);
+      				fireball.image_xscale = facingDir;
+      			
+      				fireball = instance_create_layer(x, y, "Instances", obj_player_fireball);
+      				fireball.image_xscale = -facingDir;
+      			}
+                  else if powerUp == "Cloud" && obj_game_manager.cloud_platforms > 0 {
+                      instance_create_layer(x, y + 52, "Instances", obj_cloud_platform);
+                      
+                      for (i = 0; i < obj_game_manager.cloud_platforms; i++) {
+                          
+                      }
+                  }
+      		
+      			create_star_effect();
+      		}
+        }
 	}
 	else if check_ground_at(x, y + velocityY) && velocityY > 1 {
         
@@ -629,6 +639,7 @@ cat_attack = function() {
 }
 
 animate = function() {
+    show_debug_message(flapFrame);
 	image_xscale = facingDir * 2;
 	image_yscale = 2;
 	
@@ -652,6 +663,11 @@ animate = function() {
 		image_index = floor(attackFrame);
 		attackFrame += .2;
 	}
+    else if flapFrame < 4 {
+		sprite_index = spr_mario_flap_raccoon;
+		flapFrame++;
+        
+    }
     else if climbing {
         if jumpHoldControl || crouchControl {
             sprite_index = spr_mario_climb_cat;

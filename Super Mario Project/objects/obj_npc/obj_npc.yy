@@ -34,8 +34,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_npc_toadsworth",
-    "path":"sprites/spr_npc_toadsworth/spr_npc_toadsworth.yy",
+    "name":"spr_npc_toad",
+    "path":"sprites/spr_npc_toad/spr_npc_toad.yy",
   },
   "spriteMaskId":null,
   "visible":true,

@@ -1,6 +1,11 @@
-npc_array = [ "Toadsworth", "Toad1", "Toad2", "Toad3", "Toad4" ];
+npc_array = [ "Toadsworth", "Toad1", "Toad2", "Toad3", "Toad4", 
+"Toad5", "Toad6", "Toad7", "Toad8", "Toad9" ];
 
-npc_sprites = [ spr_npc_toadsworth, spr_npc_toad_red, spr_npc_toad_green, spr_npc_toad_red ,spr_npc_toad_purple ];
+npc_sprites = [ spr_npc_toadsworth, 
+spr_npc_toad_red, spr_npc_toad_green, 
+spr_npc_toad_red ,spr_npc_toad_purple, 
+spr_npc_toad_yellow, spr_npc_toad_green,
+spr_npc_toad_purple_raccoon, spr_npc_toad_blue, spr_npc_toad_red ];
 
 sprite_index = npc_sprites[array_get_index(npc_array, npc_name)];
 
@@ -30,5 +35,29 @@ dialogue_toad3 = [ "No Princess here, that's for sure. Are you trying to save he
 dialogue_toad4 = [ "Toadsworth is having us specialty-less Toads keep watch for invaders.",
 "Not sure why when that Petey Piranha guy is already in our castle." ];
 
-npc_first_interaction_dialogues = [ dialogue_toadsworth_1, dialogue_toad1, dialogue_toad2, dialogue_toad3, dialogue_toad4 ];
-npc_repeat_interaction_dialogues = [ dialogue_toadsworth_2, dialogue_toad1, dialogue_toad2, dialogue_toad3, dialogue_toad4 ];
+dialogue_toad5 = [ "The Princess ordered this wall to be put up. It was supposed to keep us safe from intruders.",
+"Maybe we need to build a roof. Who needs sunlight and fresh air anyway?" ];
+
+dialogue_toad6 = [ "We're all trying to keep up with the town. We rely on each other to eat, survive, everything.",
+"Not much we can do but wait for the Princess to restore the order." ];
+
+dialogue_toad7 = [ "My Raccoon Tail isn't awfully useful here.",
+"It's a shame our town doesn't have gratuitous platforming all over the place.",
+"At least I can use it to break some of the brick blocks scattered all over." ];
+
+dialogue_toad8 = [ "Living with all my friends is the best life I could ask for! If only the Princess were still around, I'd have no worries!",
+"I'm sure you'll bring her back quickly." ];
+
+dialogue_toad9 = [ "Turns out moving to New Donk is gonna be a no-go for me.",
+"The city is nice and all, but I disagree with Mayor Pauline's policies.",
+"She thinks she can solve the city's problems with singing alone?",
+"That city will be a run-down dystopia within the year, mark my words." ];
+
+npc_first_interaction_dialogues = [ dialogue_toadsworth_1, 
+dialogue_toad1, dialogue_toad2, dialogue_toad3, 
+dialogue_toad4, dialogue_toad5, dialogue_toad6,
+dialogue_toad7, dialogue_toad8, dialogue_toad9 ];
+npc_repeat_interaction_dialogues = [ dialogue_toadsworth_2, 
+dialogue_toad1, dialogue_toad2, dialogue_toad3, 
+dialogue_toad4, dialogue_toad5, dialogue_toad6,
+dialogue_toad7, dialogue_toad8, dialogue_toad9 ];

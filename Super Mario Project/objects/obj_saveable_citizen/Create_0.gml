@@ -1,6 +1,10 @@
-saveable_array = [ "Toad1", "Toad2", "Toad3", "Toad4" ];
+saveable_array = [ "Toad1", "Toad2", "Toad3", "Toad4", "Toad5", 
+"Toad6", "Toad7", "Toad8", "Toad9" ];
 
-saveable_sprites = [ spr_npc_toad_red, spr_npc_toad_yellow, spr_npc_toad_red, spr_npc_toad_purple ];
+saveable_sprites = [ spr_npc_toad_red, spr_npc_toad_yellow, 
+spr_npc_toad_red, spr_npc_toad_purple, spr_npc_toad_yellow,
+spr_npc_toad_green, spr_npc_toad_purple_raccoon,
+spr_npc_toad_blue, spr_npc_toad_red ];
 
 sprite_index = saveable_sprites[array_get_index(saveable_array, saveable_name)];
 
@@ -23,7 +27,33 @@ dialogue_toad4 = [ "Yikes! I couldn't get out of these blocks!",
 "This area is pretty neat, though. Far away from the pressures of the kingdom...",
 "Well, it was nice while it lasted. Back to serving the monarchy." ];
 
-saveable_interaction_dialogues = [ dialogue_toad1, dialogue_toad2, dialogue_toad3, dialogue_toad4 ];
+dialogue_toad5 = [ "I need to get back home! My neighbors are having a party right now!",
+"Oh, they all got teleported too?",
+"The party's probably off then...",
+"I'd better get home anyway. The turnips won't pluck themselves." ];
+
+dialogue_toad6 = [ "It seems like all of us Toad Towners ended up in this area.",
+"We wanted to have a party, but we can't do that without the Princess.",
+"I guess Toadsworth said you had to save us before you could go after her, huh?",
+"He's a smart guy, but he can't keep up with the castle anymore.",
+"Anyway, I guess I should get home. Could you help save my neighbors? I'd appreciate it!" ];
+
+dialogue_toad7 = [ "I assume you used a Super Bell to get here. The climbing ability is super cool, but I prefer gliding through the air.",
+"If you want to glide, you can hit that block over there. It'll give you a Raccoon Leaf, which will let you have a cool tail like me.",
+"Also, you can use it to defeat enemies."];
+
+dialogue_toad8 = [ "This guy is my best friend! We've been friends since around the time the Princess came along.",
+"He moved into Toad Town, so I had to follow him! What luck we got trapped here together, it felt like no time at all!",
+"Well, time to get back to town! Thank you!"];
+
+dialogue_toad9 = [ "That Toad is my neighbor. We were friends when we were young, but he started following me around.",
+"It's some kind of cruel poetry that we get trapped in a box together, and he wouldn't stop talking.",
+"Maybe I need to move to New Donk City. Do they accept Toads there?" ];
+
+saveable_interaction_dialogues = [ dialogue_toad1, 
+dialogue_toad2, dialogue_toad3, dialogue_toad4, 
+dialogue_toad5, dialogue_toad6, dialogue_toad7,
+dialogue_toad8, dialogue_toad9 ];
 
 save = function() {
     effect_create_layer("Effects", ef_smoke, x, y, 5, c_white);
