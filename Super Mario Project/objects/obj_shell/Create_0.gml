@@ -29,7 +29,7 @@ sit_still = function() {
 	}
 	
 	y += velocityY;
-			
+    
     if velocityY < terminalFallSpeed {
         velocityY++;
     }
@@ -55,4 +55,13 @@ wobble = function() {
 	}
 	
 	x += velocityX;
+}
+
+throw_item = function() {
+    y -= 32;
+    velocityX = obj_mario.facingDir * 8;
+}
+
+gentle_set = function() {
+    x += 32 * obj_mario.facingDir;
 }

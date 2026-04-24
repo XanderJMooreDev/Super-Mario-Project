@@ -50,6 +50,8 @@ if !obj_game_manager.playable {
 
 check_controls();
 
+attempt_pickup();
+
 if climbing {
     apply_climb();
 }
