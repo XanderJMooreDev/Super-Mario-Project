@@ -314,7 +314,7 @@ check_ground_at = function(cx, cy) {
             else if place_meeting(cx, cy, obj_warp_pipe) { 
                 pipe = instance_place(cx, cy, obj_warp_pipe);
                 
-                if pipe.match_id == -1 || carrying == noone {
+                if pipe.match_id == -1 || carrying != noone {
                     return true;
                 }
                 
@@ -550,7 +550,7 @@ attempt_pickup = function() {
 }
 
 use_power = function() {
-    if carrying == noone {
+    if carrying != noone {
         return;
     }
     
