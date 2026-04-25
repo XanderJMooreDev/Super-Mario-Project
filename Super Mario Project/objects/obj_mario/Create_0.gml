@@ -10,6 +10,7 @@ climbSpeed = 6;
 spinFrame = 9;
 attackFrame = 9;
 flapFrame = 9;
+throwFrame = 9;
 
 alive = true;
 deathHop = 300;
@@ -532,6 +533,7 @@ attempt_pickup = function() {
                 carrying.gentle_set();
             }
             else {
+                throwFrame = 0;
                 carrying.throw_item();
             }
             carrying = noone;
@@ -723,6 +725,10 @@ animate = function() {
 		sprite_index = power_sprites[array_get_index(power_ups, powerUp)];
 		image_index = floor(attackFrame);
 		attackFrame += .2;
+	}
+	else if throwFrame < 4 {
+		sprite_index = throw_sprites[array_get_index(power_ups, powerUp)];
+		throwFrame += .2;
 	}
     else if flapFrame < 4 {
         if carrying != noone {
