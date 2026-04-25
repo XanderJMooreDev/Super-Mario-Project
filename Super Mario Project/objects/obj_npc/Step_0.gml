@@ -9,11 +9,16 @@ if obj_game_manager.playable && !hidden_until_saved {
         }
     }
     
-    if obj_mario.x > x {
-        image_xscale = 1;
+    if facing_direction == 0 {
+        if obj_mario.x > x {
+            image_xscale = 1;
+        }
+        else {
+            image_xscale = -1;
+        }
     }
     else {
-        image_xscale = -1;
+        image_xscale = facing_direction;
     }
 }
     

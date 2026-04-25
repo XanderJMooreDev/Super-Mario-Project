@@ -47,11 +47,13 @@ wobble = function() {
 	for (i = 0; i < array_length(obj_mario.breakable_terrain); i++) {
 		if place_meeting(x + velocityX, y, obj_mario.breakable_terrain[i]) {
 			velocityX *= -1;
+            instance_destroy(instance_place(x + velocityX, y, obj_mario.breakable_terrain[i]));
 		}
 	}
 	
 	if place_meeting(x + velocityX, y, obj_question_block) {
 		velocityX *= -1;
+        instance_place(x + velocityX, y, obj_question_block).get_hit_below();
 	}
 	
 	x += velocityX;

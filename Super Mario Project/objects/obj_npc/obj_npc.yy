@@ -29,6 +29,7 @@
   "properties":[
     {"$GMObjectProperty":"v2","%Name":"npc_name","filters":[],"listItems":[],"multiselect":false,"name":"npc_name","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"Toadsworth","varType":2,},
     {"$GMObjectProperty":"v2","%Name":"hidden_until_saved","filters":[],"listItems":[],"multiselect":false,"name":"hidden_until_saved","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"False","varType":3,},
+    {"$GMObjectProperty":"v2","%Name":"facing_direction","filters":[],"listItems":[],"multiselect":false,"name":"facing_direction","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"0","varType":1,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

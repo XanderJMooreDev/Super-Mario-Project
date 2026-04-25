@@ -1,10 +1,11 @@
 saveable_array = [ "Toad1", "Toad2", "Toad3", "Toad4", "Toad5", 
-"Toad6", "Toad7", "Toad8", "Toad9" ];
+"Toad6", "Toad7", "Toad8", "Toad9", "Toad10", "Toad11" ];
 
 saveable_sprites = [ spr_npc_toad_red, spr_npc_toad_yellow, 
 spr_npc_toad_red, spr_npc_toad_purple, spr_npc_toad_yellow,
 spr_npc_toad_green, spr_npc_toad_purple_raccoon,
-spr_npc_toad_blue, spr_npc_toad_red ];
+spr_npc_toad_blue, spr_npc_toad_red, spr_npc_toad_green_fire,
+spr_npc_toadette ];
 
 sprite_index = saveable_sprites[array_get_index(saveable_array, saveable_name)];
 
@@ -50,10 +51,19 @@ dialogue_toad9 = [ "That Toad is my neighbor. We were friends when we were young
 "It's some kind of cruel poetry that we get trapped in a box together, and he wouldn't stop talking.",
 "Maybe I need to move to New Donk City. Do they accept Toads there?" ];
 
+dialogue_toad10 = [ "I hope you don't mind I took that Fire Flower. I thought I'd use it took rescue myself, but there's some Rexes down there.",
+"I'm terribly afraid of Rexes. They squish down like an accordian, it's so creepy.",
+"So I think I'll just go back home instead." ];
+
+dialogue_toadette = [ "Hi, Mario! This area seems particularly dense with enemies. Bowser Jr. really didn't hold back on flooding this place with his worst.",
+"How is Toadsworth doing? I guess the castle needs some help, huh? I help with a lot of the maintenance, and this kingdom is looking a little worse for wear.",
+"I hope to see you around the kingdom!" ];
+
 saveable_interaction_dialogues = [ dialogue_toad1, 
 dialogue_toad2, dialogue_toad3, dialogue_toad4, 
 dialogue_toad5, dialogue_toad6, dialogue_toad7,
-dialogue_toad8, dialogue_toad9 ];
+dialogue_toad8, dialogue_toad9, dialogue_toad10,
+dialogue_toadette ];
 
 save = function() {
     effect_create_layer("Effects", ef_smoke, x, y, 5, c_white);

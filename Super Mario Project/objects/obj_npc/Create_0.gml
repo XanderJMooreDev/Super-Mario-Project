@@ -1,11 +1,12 @@
 npc_array = [ "Toadsworth", "Toad1", "Toad2", "Toad3", "Toad4", 
-"Toad5", "Toad6", "Toad7", "Toad8", "Toad9" ];
+"Toad5", "Toad6", "Toad7", "Toad8", "Toad9", "Toad10" ];
 
 npc_sprites = [ spr_npc_toadsworth, 
 spr_npc_toad_red, spr_npc_toad_green, 
 spr_npc_toad_red ,spr_npc_toad_purple, 
 spr_npc_toad_yellow, spr_npc_toad_green,
-spr_npc_toad_purple_raccoon, spr_npc_toad_blue, spr_npc_toad_red ];
+spr_npc_toad_purple_raccoon, spr_npc_toad_blue, 
+spr_npc_toad_red, spr_npc_toad_green_fire ];
 
 sprite_index = npc_sprites[array_get_index(npc_array, npc_name)];
 
@@ -53,11 +54,16 @@ dialogue_toad9 = [ "Turns out moving to New Donk is gonna be a no-go for me.",
 "She thinks she can solve the city's problems with singing alone?",
 "That city will be a run-down dystopia within the year, mark my words." ];
 
+dialogue_toad10 = [ "Fire power is super helpful here! I can keep us safe from the Goombas and Koopa Troopas around here. I'm even trying to get over my fear of Rexes.",
+"I need to be able to defend the people here. That's what Captain Toad would do if he were around." ];
+
 npc_first_interaction_dialogues = [ dialogue_toadsworth_1, 
 dialogue_toad1, dialogue_toad2, dialogue_toad3, 
 dialogue_toad4, dialogue_toad5, dialogue_toad6,
-dialogue_toad7, dialogue_toad8, dialogue_toad9 ];
+dialogue_toad7, dialogue_toad8, dialogue_toad9,
+dialogue_toad10 ];
 npc_repeat_interaction_dialogues = [ dialogue_toadsworth_2, 
 dialogue_toad1, dialogue_toad2, dialogue_toad3, 
 dialogue_toad4, dialogue_toad5, dialogue_toad6,
-dialogue_toad7, dialogue_toad8, dialogue_toad9 ];
+dialogue_toad7, dialogue_toad8, dialogue_toad9,
+dialogue_toad10 ];
