@@ -81,6 +81,7 @@
     {"id":{"name":"obj_saveable_citizen","path":"objects/obj_saveable_citizen/obj_saveable_citizen.yy",},},
     {"id":{"name":"obj_shell","path":"objects/obj_shell/obj_shell.yy",},},
     {"id":{"name":"obj_simple_enemy","path":"objects/obj_simple_enemy/obj_simple_enemy.yy",},},
+    {"id":{"name":"obj_ui_manager","path":"objects/obj_ui_manager/obj_ui_manager.yy",},},
     {"id":{"name":"obj_warp_pipe","path":"objects/obj_warp_pipe/obj_warp_pipe.yy",},},
     {"id":{"name":"room_temp","path":"rooms/room_temp/room_temp.yy",},},
     {"id":{"name":"spr_boomerang","path":"sprites/spr_boomerang/spr_boomerang.yy",},},

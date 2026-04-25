@@ -57,6 +57,7 @@ dialogue_toad8, dialogue_toad9 ];
 
 save = function() {
     effect_create_layer("Effects", ef_smoke, x, y, 5, c_white);
+    array_push(obj_ui_manager.saved_sprites, sprite_index);
     obj_collect_manager.save_citizen(saveable_name);
     instance_destroy();
 }

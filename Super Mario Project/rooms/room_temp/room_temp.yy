@@ -475,6 +475,7 @@
     {"name":"inst_4508906E","path":"rooms/room_temp/room_temp.yy",},
     {"name":"inst_71DB666B","path":"rooms/room_temp/room_temp.yy",},
     {"name":"inst_67492A6B","path":"rooms/room_temp/room_temp.yy",},
+    {"name":"inst_44C7F735","path":"rooms/room_temp/room_temp.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -1248,6 +1249,7 @@
             {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_simple_enemy","path":"objects/obj_simple_enemy/obj_simple_enemy.yy",},"propertyId":{"name":"enemyType","path":"objects/obj_simple_enemy/obj_simple_enemy.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"Piranha Plant",},
           ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":5184.0,"y":11136.0,},
         {"$GMRInstance":"v4","%Name":"inst_67492A6B","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_67492A6B","objectId":{"name":"obj_shell","path":"objects/obj_shell/obj_shell.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":10752.0,"y":2976.0,},
+        {"$GMRInstance":"v4","%Name":"inst_44C7F735","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_44C7F735","objectId":{"name":"obj_ui_manager","path":"objects/obj_ui_manager/obj_ui_manager.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":-64.0,"y":0.0,},
       ],"layers":[],"name":"Instances","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRInstanceLayer":"","%Name":"Effects","depth":200,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[],"layers":[],"name":"Effects","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRInstanceLayer":"","%Name":"Background_Instances","depth":300,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
