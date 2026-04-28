@@ -1,5 +1,5 @@
 saveable_array = [ "Toad1", "Toad2", "Toad3", "Toad4", "Toad5", 
-"Toad6", "Toad7", "Toad8", "Toad9", "Toad10", "Toad11" ];
+"Toad6", "Toad7", "Toad8", "Toad9", "Toad10", "Toadette" ];
 
 saveable_sprites = [ spr_npc_toad_red, spr_npc_toad_yellow, 
 spr_npc_toad_red, spr_npc_toad_purple, spr_npc_toad_yellow,
