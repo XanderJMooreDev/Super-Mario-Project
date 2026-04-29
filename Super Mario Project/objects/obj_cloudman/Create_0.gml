@@ -7,6 +7,15 @@ spinStrength = 15;
 walkSpeed = 8;
 climbSpeed = 6;
 
+/* 0. Cyclone Boomerang
+ * 1. Cumulus Platform
+ * 2. Tornado Spin
+ * 3. Draft Dash
+ * 4. Stratuceps
+ */
+
+abilities = [ true, true, true, true, false ];
+
 spinFrame = 9;
 attackFrame = 9;
 flapFrame = 9;
@@ -70,6 +79,16 @@ crouch_carry_sprites = [ spr_mario_crouch_carry_small, spr_mario_crouch_carry_su
 power_sprites = [ spr_mario_crouch_small, spr_mario_crouch_super, spr_mario_power_fire, spr_mario_power_boomerang, spr_mario_crouch_cloud, spr_mario_power_raccoon, spr_mario_power_cat ];
 throw_sprites = [ spr_mario_throw_small, spr_mario_throw_super, spr_mario_throw_fire, spr_mario_throw_boomerang, spr_mario_throw_cloud, spr_mario_throw_raccoon, spr_mario_throw_cat ];
 
+unlock_cloud_platforms = function() {
+    obj_game_manager.cloud_platforms = 2;
+    cloud = instance_create_layer(x + 4, y - 10, "Instances", obj_floating_cloud);
+    obj_game_manager.enqueue_cloud(cloud);
+    cloud = instance_create_layer(x - 4, y - 10, "Instances", obj_floating_cloud);
+    obj_game_manager.enqueue_cloud(cloud);
+}
+
+unlock_cloud_platforms();
+
 check_controls = function () {
 	jumpControl = keyboard_check_pressed(vk_space) || keyboard_check_pressed(ord("W"));
 	jumpHoldControl = keyboard_check(vk_space) || keyboard_check(ord("W"));
@@ -78,6 +97,7 @@ check_controls = function () {
 	leftControl = keyboard_check(ord("A"));
 	rightControl = keyboard_check(ord("D"));
 	powerControl = keyboard_check(ord("E"));
+	platformControl = keyboard_check_pressed(ord("R"));
     carryControl = keyboard_check(ord("Q"));
 	joystickX = rightControl - leftControl;
 }
@@ -203,7 +223,7 @@ apply_gravity = function() {
 	
 	if jumpControl {
 		if check_ground_at(x, y + 6) {
-			if crouchControl && carrying == noone {
+			if abilities[3] && crouchControl && carrying == noone {
 				velocityY = -jumpStrength / 3 * 2;
 				diveOverpowerJoyX = facingDir * 30;
 				
@@ -215,7 +235,7 @@ apply_gravity = function() {
 			}
 		}
 		else {
-			if carrying == noone && crouchControl && !dove {
+			if abilities[3] && carrying == noone && crouchControl && !dove {
 				dove = true;
 				velocityY = -jumpStrength / 3 * 2;
 				diveOverpowerJoyX = facingDir * 30;
@@ -239,41 +259,19 @@ apply_gravity = function() {
 	}
 	
 	if jumpControl && wallOverpowerJoyX == 0 {
-        if hasAerialSpun || carrying != noone {
-            if powerUp == "Raccoon" {
-                flapFrame = 0;
-                velocityY = -1;
-            }
-        }
-        else {
-      		if !crouchControl {	
-      			spinFrame = 0;
-      			velocityY = -spinStrength;
-      			hasAerialSpun = true;
-      			
-      			if powerUp == "Fire" {
-      				fireball = instance_create_layer(x, y, "Instances", obj_player_fireball);
-      				fireball.image_xscale = facingDir;
-      			
-      				fireball = instance_create_layer(x, y, "Instances", obj_player_fireball);
-      				fireball.image_xscale = -facingDir;
-      			}
-                  else if powerUp == "Cloud" && obj_game_manager.cloud_platforms > 0 {
-                      instance_create_layer(x, y + 52, "Instances", obj_cloud_platform);
-                      
-                      for (i = 0; i < obj_game_manager.cloud_platforms; i++) {
-                          
-                      }
-                  }
-      		
-      			create_star_effect();
-      		}
+        if !hasAerialSpun && carrying == noone 
+            && !crouchControl && abilities[2] {	
+            spinFrame = 0;
+            velocityY = -spinStrength;
+            hasAerialSpun = true;
+        
+            create_star_effect();
         }
 	}
 	else if check_ground_at(x, y + velocityY) && velocityY > 1 {
         
         if !place_meeting(x, y + velocityY, obj_cloud_platform) {
-            obj_game_manager.cloud_platforms = 2; 
+            obj_game_manager.cloud_platforms = 2;
             instance_destroy(obj_cloud_platform);
         }
         
@@ -404,7 +402,7 @@ check_ground_at = function(cx, cy) {
     if place_meeting(x, y + 8, obj_shell) &&
 	!place_meeting(x, y, obj_shell) {
 		if instance_place(x, y + 8, obj_shell).velocityX == 0 {
-            if !carryControl {
+            if !carryControl || !abilities[4] {
                 instance_place(x, y + 8, obj_shell).velocityX = facingDir * 10;
             }
         }
@@ -423,7 +421,7 @@ check_ground_at = function(cx, cy) {
 	}
     else if place_meeting(x, y, obj_shell) {
         if instance_place(x, y, obj_shell).velocityX == 0 {
-            if !carryControl {
+            if !carryControl || !abilities[4] {
                instance_place(x, y, obj_shell).velocityX = facingDir * 8;
                instance_place(x, y, obj_shell).x += facingDir * 8;
             }
@@ -544,7 +542,7 @@ attempt_pickup = function() {
 		if place_meeting(x, y, carryable_items[i]) {
 			if place_meeting(x, y, carryable_items[i]) && 
                 carryControl && attackFrame >= 4 && spinFrame >= 4 && 
-                gpAirStall == 0 {
+                gpAirStall == 0 && abilities[4] {
 				carrying = instance_place(x, y, carryable_items[i]);
 			}
 		}
@@ -566,35 +564,25 @@ use_power = function() {
             cat_attack();
         }
     }
+      			
+    if platformControl && abilities[1]
+         && obj_game_manager.cloud_platforms > 0 { 
+        instance_create_layer(x, y + 100, "Instances", obj_cloud_platform);
+    }
     
 	if powerCooldown > 0 || !powerControl {
 		powerCooldown--;
 		return;
 	}
-	
-	switch powerUp {
-	case "Fire":
-		powerCooldown = 30;
-		fireball = instance_create_layer(x, y, "Instances", obj_player_fireball);
-		fireball.image_xscale = facingDir;
-		break;
-	case "Boomerang":
-		if !instance_exists(obj_player_boomerang) {
+    
+    if abilities[0] {
+        if !instance_exists(obj_player_boomerang) {
 			powerCooldown = 30;
 			boomerang = instance_create_layer(x, y, "Instances", obj_player_boomerang);
 			boomerang.startDir = facingDir;
 			boomerang.throw_start();
 		}
-		break;
-    case "Raccoon":
-        powerCooldown = 30;
-        attackFrame = 0;
-    case "Cat":
-        powerCooldown = 30;
-        attackFrame = 0;
-	default:
-		break;
-	}
+    }
 }
 
 pick_up_power_up = function() {
@@ -624,10 +612,6 @@ pick_up_power_up = function() {
 			break;
 		case "Cloud Flower":
             if powerUp != "Cloud" {
-                cloud = instance_create_layer(x + 4, y - 10, "Instances", obj_floating_cloud);
-                obj_game_manager.enqueue_cloud(cloud);
-                cloud = instance_create_layer(x - 4, y - 10, "Instances", obj_floating_cloud);
-                obj_game_manager.enqueue_cloud(cloud);
             }
             
 			powerUp = "Cloud";
@@ -700,7 +684,7 @@ cat_attack = function() {
 animate = function() {
 	image_xscale = facingDir * 2;
 	image_yscale = 2;
-	
+    
     if !alive {
         sprite_index = spr_mario_die;
     }

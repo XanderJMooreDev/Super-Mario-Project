@@ -1,3 +1,3 @@
-if obj_mario.alive {
-    follow_object(obj_mario);
+if global.player.alive {
+    follow_object(global.player);
 }

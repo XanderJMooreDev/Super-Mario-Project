@@ -13,15 +13,15 @@ if itemType == "Coin" {
 
 sit_still = function() {
 	
-	for (i = 0; i < array_length(obj_mario.collideable_terrain); i++) {
-		if place_meeting(x + velocityX, y + velocityY, obj_mario.collideable_terrain[i]) {
+	for (i = 0; i < array_length(global.player.collideable_terrain); i++) {
+		if place_meeting(x + velocityX, y + velocityY, global.player.collideable_terrain[i]) {
 			velocityY = 0;
 			return;
 		}
 	}
 	
-	for (i = 0; i < array_length(obj_mario.breakable_terrain); i++) {
-		if place_meeting(x + velocityX, y + velocityY, obj_mario.breakable_terrain[i]) {
+	for (i = 0; i < array_length(global.player.breakable_terrain); i++) {
+		if place_meeting(x + velocityX, y + velocityY, global.player.breakable_terrain[i]) {
 			velocityY = 0;
 			return;
 		}
@@ -46,15 +46,15 @@ wobble = function() {
 	
 	sit_still();
 	
-	for (i = 0; i < array_length(obj_mario.collideable_terrain); i++) {
-		if place_meeting(x + velocityX, y, obj_mario.collideable_terrain[i]) {
+	for (i = 0; i < array_length(global.player.collideable_terrain); i++) {
+		if place_meeting(x + velocityX, y, global.player.collideable_terrain[i]) {
 			velocityX *= -1;
 			return;
 		}
 	}
 	
-	for (i = 0; i < array_length(obj_mario.breakable_terrain); i++) {
-		if place_meeting(x + velocityX, y, obj_mario.breakable_terrain[i]) {
+	for (i = 0; i < array_length(global.player.breakable_terrain); i++) {
+		if place_meeting(x + velocityX, y, global.player.breakable_terrain[i]) {
 			velocityX *= -1;
 			return;
 		}

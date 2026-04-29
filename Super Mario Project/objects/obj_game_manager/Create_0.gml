@@ -2,6 +2,8 @@ gpu_set_texfilter(false);
 
 global.current_kingdom = 0;
 
+global.player = obj_cloudman;
+
 respawnX = 0;
 respawnY = 0;
 

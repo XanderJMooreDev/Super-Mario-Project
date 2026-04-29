@@ -7,15 +7,15 @@ throw_start = function() {
 }
 
 boomerang_thrown = function() {
-	for (i = 0; i < array_length(obj_mario.collideable_terrain); i++) {
-		if place_meeting(x + velocityX, y, obj_mario.collideable_terrain[i]) {
+	for (i = 0; i < array_length(global.player.collideable_terrain); i++) {
+		if place_meeting(x + velocityX, y, global.player.collideable_terrain[i]) {
 			instance_destroy();
 		}
 	}
 	
-	for (i = 0; i < array_length(obj_mario.breakable_terrain); i++) {
-		if place_meeting(x + velocityX, y, obj_mario.breakable_terrain[i]) {
-			instance_destroy(instance_place(x + velocityX, y, obj_mario.breakable_terrain[i]));
+	for (i = 0; i < array_length(global.player.breakable_terrain); i++) {
+		if place_meeting(x + velocityX, y, global.player.breakable_terrain[i]) {
+			instance_destroy(instance_place(x + velocityX, y, global.player.breakable_terrain[i]));
 		}
 	}
 	

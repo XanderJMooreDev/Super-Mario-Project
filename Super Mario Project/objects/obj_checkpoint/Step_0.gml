@@ -1,4 +1,4 @@
-if place_meeting(x, y, obj_mario) {
+if place_meeting(x, y, global.player) {
     obj_game_manager.respawnX = x;
     obj_game_manager.respawnY = y;
 }

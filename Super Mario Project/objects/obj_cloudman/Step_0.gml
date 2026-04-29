@@ -42,7 +42,7 @@ if !alive {
     return;
 }
 
-transition_power(lastPower, powerUp);
+//transition_power(lastPower, powerUp);
 
 if !obj_game_manager.playable {
 	return;
@@ -60,5 +60,5 @@ else {
     apply_walk();
 }
 
-pick_up_power_up();
+//pick_up_power_up();
 use_power();

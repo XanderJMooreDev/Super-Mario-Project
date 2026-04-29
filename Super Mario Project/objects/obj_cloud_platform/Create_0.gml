@@ -1,12 +1,12 @@
 check_ground_at = function(cx, cy) {
-	for (i = 0; i < array_length(obj_mario.collideable_terrain); i++) {
-		if place_meeting(cx, cy, obj_mario.collideable_terrain[i]) {
+	for (i = 0; i < array_length(global.player.collideable_terrain); i++) {
+		if place_meeting(cx, cy, global.player.collideable_terrain[i]) {
 			return true;
 		}
 	};
 	
-	for (i = 0; i < array_length(obj_mario.breakable_terrain); i++) {
-		if place_meeting(cx, cy, obj_mario.breakable_terrain[i]) {
+	for (i = 0; i < array_length(global.player.breakable_terrain); i++) {
+		if place_meeting(cx, cy, global.player.breakable_terrain[i]) {
 			return true;
 		}
 	};

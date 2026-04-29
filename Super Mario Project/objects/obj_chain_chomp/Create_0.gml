@@ -37,7 +37,7 @@ walk = function() {
 sit_still = function() {
     
     if array_length(collideable_terrain) == 0 {
-       array_copy(collideable_terrain, 0, obj_mario.collideable_terrain, 0, array_length(obj_mario.collideable_terrain));
+       array_copy(collideable_terrain, 0, global.player.collideable_terrain, 0, array_length(global.player.collideable_terrain));
        array_delete(collideable_terrain, 0, 1);
     }
         
@@ -50,8 +50,8 @@ sit_still = function() {
 		}
 	}
 	
-	for (i = 0; i < array_length(obj_mario.breakable_terrain); i++) {
-		if place_meeting(x + velocityX, y + velocityY, obj_mario.breakable_terrain[i]) {
+	for (i = 0; i < array_length(global.player.breakable_terrain); i++) {
+		if place_meeting(x + velocityX, y + velocityY, global.player.breakable_terrain[i]) {
 			velocityY = -hopStrength;
 			return;
 		}
@@ -99,10 +99,10 @@ wobble = function() {
 		}
 	}
 	
-	for (i = 0; i < array_length(obj_mario.breakable_terrain); i++) {
-		if place_meeting(x + velocityX, y, obj_mario.breakable_terrain[i]) {
+	for (i = 0; i < array_length(global.player.breakable_terrain); i++) {
+		if place_meeting(x + velocityX, y, global.player.breakable_terrain[i]) {
 			hit_edge();
-            instance_destroy(instance_place(x + velocityX, y, obj_mario.breakable_terrain[i]));
+            instance_destroy(instance_place(x + velocityX, y, global.player.breakable_terrain[i]));
  			return;
 		}
 	}
@@ -135,28 +135,28 @@ kill_fall = function() {
 	dying = true;
 	image_yscale *= -1;
 	
-	if y > obj_mario.y + 300 {
+	if y > global.player.y + 300 {
 		instance_destroy();
 	}
 }
 
 attempt_snap = function() {
-    if abs(obj_mario.x - stump.ctrX) == 0 {
+    if abs(global.player.x - stump.ctrX) == 0 {
         angleX = 0;
         angleY = 1;
     }
-    else if abs(obj_mario.y - stump.ctrY) == 0 {
+    else if abs(global.player.y - stump.ctrY) == 0 {
         angleX = 1;
         angleY = 0;
     }
     else {
-        if abs(obj_mario.x - stump.ctrX) > abs(obj_mario.y - stump.ctrY) {
-            angleX = (obj_mario.x - stump.ctrX) / abs(obj_mario.x - stump.ctrX);
-            angleY = (obj_mario.y - stump.ctrY) / abs(obj_mario.x - stump.ctrX);
+        if abs(global.player.x - stump.ctrX) > abs(global.player.y - stump.ctrY) {
+            angleX = (global.player.x - stump.ctrX) / abs(global.player.x - stump.ctrX);
+            angleY = (global.player.y - stump.ctrY) / abs(global.player.x - stump.ctrX);
         }
         else {
-            angleX = (obj_mario.x - stump.ctrX) / abs(obj_mario.y - stump.ctrY);
-            angleY = (obj_mario.y - stump.ctrY) / abs(obj_mario.y - stump.ctrY);
+            angleX = (global.player.x - stump.ctrX) / abs(global.player.y - stump.ctrY);
+            angleY = (global.player.y - stump.ctrY) / abs(global.player.y - stump.ctrY);
         }
     }
     
