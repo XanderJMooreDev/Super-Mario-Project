@@ -6,3 +6,4 @@ powerTransition = 31;
 iFrames = 60;
 deathHop = 300;
 alive = true;
+hp = global.maxHp;

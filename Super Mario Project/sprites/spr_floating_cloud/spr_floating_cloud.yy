@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"Elements",
-    "path":"folders/Sprites/Elements.yy",
+    "path":"folders/Placeholder/Mario Sprites/Elements.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

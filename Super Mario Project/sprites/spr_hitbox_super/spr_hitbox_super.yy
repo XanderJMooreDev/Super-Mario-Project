@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"Hitboxes",
-    "path":"folders/Sprites/Hitboxes.yy",
+    "path":"folders/Placeholder/Mario Sprites/Hitboxes.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

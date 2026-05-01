@@ -26,7 +26,7 @@
   "origin":6,
   "parent":{
     "name":"Structures",
-    "path":"folders/Sprites/Structures.yy",
+    "path":"folders/Placeholder/Mario Sprites/Structures.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

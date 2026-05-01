@@ -27,7 +27,7 @@
   "origin":4,
   "parent":{
     "name":"Rex",
-    "path":"folders/Sprites/Enemies/Rex.yy",
+    "path":"folders/Placeholder/Mario Sprites/Enemies/Rex.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

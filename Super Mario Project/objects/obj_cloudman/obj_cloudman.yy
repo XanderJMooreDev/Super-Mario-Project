@@ -37,6 +37,9 @@
     "name":"spr_mario_stand_small",
     "path":"sprites/spr_mario_stand_small/spr_mario_stand_small.yy",
   },
-  "spriteMaskId":null,
+  "spriteMaskId":{
+    "name":"spr_hitbox_cloudman",
+    "path":"sprites/spr_hitbox_cloudman/spr_hitbox_cloudman.yy",
+  },
   "visible":true,
 }

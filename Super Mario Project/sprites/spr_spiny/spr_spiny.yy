@@ -27,7 +27,7 @@
   "origin":4,
   "parent":{
     "name":"Spiny",
-    "path":"folders/Sprites/Enemies/Spiny.yy",
+    "path":"folders/Placeholder/Mario Sprites/Enemies/Spiny.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -29,7 +29,7 @@
   "origin":4,
   "parent":{
     "name":"Boomerang",
-    "path":"folders/Sprites/Mario/Boomerang.yy",
+    "path":"folders/Placeholder/Mario Sprites/Mario/Boomerang.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

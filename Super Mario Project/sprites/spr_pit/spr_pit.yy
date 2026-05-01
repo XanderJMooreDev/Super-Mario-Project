@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"Death Effects",
-    "path":"folders/Sprites/Death Effects.yy",
+    "path":"folders/Placeholder/Mario Sprites/Death Effects.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

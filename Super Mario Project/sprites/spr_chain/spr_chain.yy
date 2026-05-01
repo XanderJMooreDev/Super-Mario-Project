@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"Chain Chomp",
-    "path":"folders/Sprites/Enemies/Chain Chomp.yy",
+    "path":"folders/Placeholder/Mario Sprites/Enemies/Chain Chomp.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

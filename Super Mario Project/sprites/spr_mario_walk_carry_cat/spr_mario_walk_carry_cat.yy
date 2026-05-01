@@ -27,7 +27,7 @@
   "origin":4,
   "parent":{
     "name":"Cat",
-    "path":"folders/Sprites/Mario/Cat.yy",
+    "path":"folders/Placeholder/Mario Sprites/Mario/Cat.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -27,7 +27,7 @@
   "origin":4,
   "parent":{
     "name":"Raccoon",
-    "path":"folders/Sprites/Mario/Raccoon.yy",
+    "path":"folders/Placeholder/Mario Sprites/Mario/Raccoon.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

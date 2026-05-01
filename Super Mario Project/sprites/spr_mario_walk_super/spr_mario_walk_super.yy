@@ -27,7 +27,7 @@
   "origin":4,
   "parent":{
     "name":"Super",
-    "path":"folders/Sprites/Mario/Super.yy",
+    "path":"folders/Placeholder/Mario Sprites/Mario/Super.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

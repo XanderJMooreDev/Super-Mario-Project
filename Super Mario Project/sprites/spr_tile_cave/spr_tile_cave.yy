@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"Tiles",
-    "path":"folders/Sprites/Tiles.yy",
+    "path":"folders/Placeholder/Mario Sprites/Tiles.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

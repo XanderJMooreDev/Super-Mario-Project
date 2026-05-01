@@ -27,7 +27,7 @@
   "origin":4,
   "parent":{
     "name":"Fire",
-    "path":"folders/Sprites/Mario/Fire.yy",
+    "path":"folders/Placeholder/Mario Sprites/Mario/Fire.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

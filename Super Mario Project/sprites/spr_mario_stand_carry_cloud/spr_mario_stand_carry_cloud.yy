@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"Cloud",
-    "path":"folders/Sprites/Mario/Cloud.yy",
+    "path":"folders/Placeholder/Mario Sprites/Mario/Cloud.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

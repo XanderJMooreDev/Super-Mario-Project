@@ -27,7 +27,7 @@
   "origin":4,
   "parent":{
     "name":"Goomba",
-    "path":"folders/Sprites/Enemies/Goomba.yy",
+    "path":"folders/Placeholder/Mario Sprites/Enemies/Goomba.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

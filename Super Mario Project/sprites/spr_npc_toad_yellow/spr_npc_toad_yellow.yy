@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"Toads",
-    "path":"folders/Sprites/NPCs/Toads.yy",
+    "path":"folders/Placeholder/Mario Sprites/NPCs/Toads.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

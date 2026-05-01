@@ -29,7 +29,7 @@
   "origin":4,
   "parent":{
     "name":"Small",
-    "path":"folders/Sprites/Mario/Small.yy",
+    "path":"folders/Placeholder/Mario Sprites/Mario/Small.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

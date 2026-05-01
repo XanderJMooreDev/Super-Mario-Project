@@ -7,6 +7,9 @@ spinStrength = 15;
 walkSpeed = 8;
 climbSpeed = 6;
 
+global.maxHp = 3;
+hp = global.maxHp;
+
 /* 0. Cyclone Boomerang
  * 1. Cumulus Platform
  * 2. Tornado Spin
@@ -24,12 +27,16 @@ throwFrame = 9;
 alive = true;
 deathHop = 300;
 
+draw_angle = 0;
+
 carrying = noone;
 
 lastPower = "Small";
 powerUp = "Small";
 powerCooldown = 0;
 powerTransition = 31;
+
+jumpSpinAngle = 0;
 
 iFrames = 0;
 
@@ -190,6 +197,7 @@ apply_climb = function() {
 apply_gravity = function() {
 	if carrying == noone && gpControl && !check_ground_at(x, y + 3) && gpAirStall == 0 {
 		gpAirStall = 10;
+        jumpSpinAngle = 0;
 		return;
 	}
 	else if jumpControl {
@@ -199,13 +207,13 @@ apply_gravity = function() {
 		gpAirStall--;
 		
 		if image_xscale > 0 {
-			image_angle -= 36;
+			draw_angle -= 36;
 		}
 		else {
-			image_angle += 36;
+			draw_angle += 36;
 		}
 		
-		if gpAirStall = 0 {
+		if gpAirStall == 0 {
 			gpAirStall--;
 		}
 		
@@ -226,11 +234,14 @@ apply_gravity = function() {
 			if abilities[3] && crouchControl && carrying == noone {
 				velocityY = -jumpStrength / 3 * 2;
 				diveOverpowerJoyX = facingDir * 30;
+                jumpSpinAngle = 0;
 				
 				return;
 			}
 			else {
 				velocityY = -jumpStrength;
+                jumpSpinAngle = 12 * facingDir;
+                
 				return;
 			}
 		}
@@ -239,6 +250,7 @@ apply_gravity = function() {
 				dove = true;
 				velocityY = -jumpStrength / 3 * 2;
 				diveOverpowerJoyX = facingDir * 30;
+                jumpSpinAngle = 0;
 			}
 		}
 	}
@@ -264,6 +276,7 @@ apply_gravity = function() {
             spinFrame = 0;
             velocityY = -spinStrength;
             hasAerialSpun = true;
+            jumpSpinAngle = 0;
         
             create_star_effect();
         }
@@ -279,6 +292,7 @@ apply_gravity = function() {
 		
 		hasAerialSpun = false;
 		dove = false;
+        jumpSpinAngle = 0;
 	}
 	else if check_ground_at(x, y + velocityY) && velocityY < 0 {
 		velocityY = 0;
@@ -291,7 +305,17 @@ apply_gravity = function() {
 		}
 	}
 	
-	image_angle = 0;
+    
+    if jumpSpinAngle != 0 {
+        draw_angle += jumpSpinAngle;
+        
+        if abs(draw_angle) == 360 {
+            jumpSpinAngle = 0;
+        }
+    }
+    else {
+	   draw_angle = 0;
+    }
 }
 
 check_ground_at = function(cx, cy) { 
@@ -478,27 +502,12 @@ take_damage = function() {
         return;
     }
     
-    lastPower = powerUp;
+    iFrames = 60;
+    hp--;
     
-    if powerUp == "Small" {
-            powerTransition = 31;
-			die();
-		}
-		else if powerUp = "Super" {
-			powerUp = "Small";
-			iFrames = 60;
-		}
-		else if powerUp == "Cloud" {
-			powerUp = "Super";
-			iFrames = 60;
-            
-            obj_game_manager.dequeue_cloud();
-            obj_game_manager.dequeue_cloud();
-		}
-		else {
-			powerUp = "Super";
-			iFrames = 60;
-		}
+    if hp == 0 {
+        die();
+    }
 }
 
 create_star_effect = function() {
@@ -682,8 +691,8 @@ cat_attack = function() {
 }
 
 animate = function() {
-	image_xscale = facingDir * 2;
-	image_yscale = 2;
+	image_xscale = facingDir;
+	image_yscale = 1;
     
     if !alive {
         sprite_index = spr_mario_die;
@@ -701,7 +710,14 @@ animate = function() {
                 sprite_index = jump_sprites[array_get_index(power_ups, powerUp)];
             }
             else {
-                sprite_index = jump_carry_sprites[array_get_index(power_ups, powerUp)];
+                sprite_index = spr_cloudman_jump;
+                
+                if draw_angle == 0 {
+                    image_index = 1;
+                }
+                else {
+                    draw_angle = 0;
+                }
             }
         }
     }
@@ -733,37 +749,43 @@ animate = function() {
             sprite_index = spr_mario_stand_wall_cat;
         }
     }
-	else if powerCooldown > 25 {
-		sprite_index = power_sprites[array_get_index(power_ups, powerUp)];
+	else if powerCooldown > 40 {
+		sprite_index = spr_cloudman_throw;
 	}
 	else if spinFrame < 4 {
-		sprite_index = spin_sprites[array_get_index(power_ups, powerUp)];
+		sprite_index = spr_cloudman_spin;
 		image_index = floor(spinFrame);
 		spinFrame += .3;
 	}
 	else if check_ground_at(x + joystickX * 8, y) && !check_ground_at(x, y + 8) &&
 		!(jumpControl || abs(wallOverpowerJoyX) > 10) && velocityY > 0 {
-			sprite_index = wall_sprites[array_get_index(power_ups, powerUp)];
+			sprite_index = spr_cloudman_slide;
 	}
 	else if crouching {
         if carrying == noone {
-            sprite_index = crouch_sprites[array_get_index(power_ups, powerUp)];
+            sprite_index = spr_cloudman_crouch;
         }
         else {
             sprite_index = crouch_carry_sprites[array_get_index(power_ups, powerUp)];
         }
     }
-	else if gpAirStall != 0 || diveOverpowerJoyX != 0 {
-        if diveOverpowerJoyX != 0 && powerUp == "Cat" {
-            sprite_index = power_sprites[array_get_index(power_ups, powerUp)];
-            image_index = 2;
-            return;
-        }
-		sprite_index = gp_sprites[array_get_index(power_ups, powerUp)];
+	else if gpAirStall != 0 {
+		sprite_index = spr_cloudman_jump;
+        image_index = 1;
 	}
+    else if diveOverpowerJoyX != 0 {
+        sprite_index = spr_cloudman_dive;
+    }
 	else if !check_ground_at(x, y + 8) {
         if carrying == noone {
-            sprite_index = jump_sprites[array_get_index(power_ups, powerUp)];
+                sprite_index = spr_cloudman_jump;
+                
+                if draw_angle == 0 {
+                    image_index = 1;
+                }
+                else {
+                    image_index = 0;
+                }
         }
         else {
             sprite_index = jump_carry_sprites[array_get_index(power_ups, powerUp)];
@@ -771,7 +793,7 @@ animate = function() {
 	}
 	else if abs(velocityX) > 0 {
         if carrying == noone {
-            sprite_index = walk_sprites[array_get_index(power_ups, powerUp)];
+            sprite_index = spr_cloudman_idle;
         }
         else {
             sprite_index = walk_carry_sprites[array_get_index(power_ups, powerUp)];
@@ -779,7 +801,7 @@ animate = function() {
 	}
 	else {
         if carrying == noone {
-            sprite_index = stand_sprites[array_get_index(power_ups, powerUp)];
+            sprite_index = spr_cloudman_idle;
         }
         else {
             sprite_index = stand_carry_sprites[array_get_index(power_ups, powerUp)];
@@ -794,13 +816,6 @@ animate = function() {
     else {
         image_alpha = 1;
     }
-	
-	if powerUp == "Small" {
-		mask_index = spr_hitbox_small;
-	}
-	else {
-		mask_index = spr_hitbox_super;
-	}
 }
 
 transition_power = function(pre, post) {
@@ -828,6 +843,7 @@ transition_power = function(pre, post) {
 }
 
 die = function() {
+    draw_angle = 0;
 	alive = false;
 	obj_game_manager.playable = false;
     carrying = noone;

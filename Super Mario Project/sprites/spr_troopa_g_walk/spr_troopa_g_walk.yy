@@ -27,7 +27,7 @@
   "origin":4,
   "parent":{
     "name":"Koopa Troopa",
-    "path":"folders/Sprites/Enemies/Koopa Troopa.yy",
+    "path":"folders/Placeholder/Mario Sprites/Enemies/Koopa Troopa.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

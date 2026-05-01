@@ -26,7 +26,7 @@
   "origin":6,
   "parent":{
     "name":"Blocks",
-    "path":"folders/Sprites/Blocks.yy",
+    "path":"folders/Placeholder/Mario Sprites/Blocks.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

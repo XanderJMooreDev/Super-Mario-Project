@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_boomerang",
-    "path":"sprites/spr_boomerang/spr_boomerang.yy",
+    "name":"spr_cyclonerang",
+    "path":"sprites/spr_cyclonerang/spr_cyclonerang.yy",
   },
   "spriteMaskId":null,
   "visible":true,

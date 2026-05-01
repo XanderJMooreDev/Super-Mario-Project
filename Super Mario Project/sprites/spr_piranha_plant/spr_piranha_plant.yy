@@ -27,7 +27,7 @@
   "origin":4,
   "parent":{
     "name":"Piranha Plant",
-    "path":"folders/Sprites/Enemies/Piranha Plant.yy",
+    "path":"folders/Placeholder/Mario Sprites/Enemies/Piranha Plant.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

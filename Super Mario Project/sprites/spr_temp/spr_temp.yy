@@ -26,7 +26,7 @@
   "origin":6,
   "parent":{
     "name":"Placeholder",
-    "path":"folders/Sprites/Placeholder.yy",
+    "path":"folders/Placeholder/Mario Sprites/Placeholder.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

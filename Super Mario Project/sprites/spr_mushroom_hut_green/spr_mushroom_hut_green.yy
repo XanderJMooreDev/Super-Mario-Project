@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"Mushroom Huts",
-    "path":"folders/Sprites/Structures/Mushroom Huts.yy",
+    "path":"folders/Placeholder/Mario Sprites/Structures/Mushroom Huts.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

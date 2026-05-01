@@ -33,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_floating_cloud",
-    "path":"sprites/spr_floating_cloud/spr_floating_cloud.yy",
+    "name":"spr_follow_cloud",
+    "path":"sprites/spr_follow_cloud/spr_follow_cloud.yy",
   },
   "spriteMaskId":null,
   "visible":true,

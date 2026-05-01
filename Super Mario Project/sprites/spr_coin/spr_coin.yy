@@ -31,7 +31,7 @@
   "origin":4,
   "parent":{
     "name":"Items",
-    "path":"folders/Sprites/Items.yy",
+    "path":"folders/Placeholder/Mario Sprites/Items.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
