@@ -235,6 +235,8 @@ apply_gravity = function() {
 				velocityY = -jumpStrength / 3 * 2;
 				diveOverpowerJoyX = facingDir * 30;
                 jumpSpinAngle = 0;
+                
+                spawn_drafter();
 				
 				return;
 			}
@@ -251,6 +253,8 @@ apply_gravity = function() {
 				velocityY = -jumpStrength / 3 * 2;
 				diveOverpowerJoyX = facingDir * 30;
                 jumpSpinAngle = 0;
+                
+                spawn_drafter();
 			}
 		}
 	}
@@ -316,6 +320,12 @@ apply_gravity = function() {
     else {
 	   draw_angle = 0;
     }
+}
+
+spawn_drafter = function() {
+    drafter = instance_create_layer(x - 20 * facingDir, y, "Instances",
+    obj_drafter);
+    drafter.image_xscale = facingDir;
 }
 
 check_ground_at = function(cx, cy) { 
@@ -511,12 +521,12 @@ take_damage = function() {
 }
 
 create_star_effect = function() {
-		effect_create_layer("Effects", ef_star, x, y - 30, 5, c_red);
-		effect_create_layer("Effects", ef_star, x, y, 5, c_yellow);
-		effect_create_layer("Effects", ef_star, x - 30, y - 15, 5, c_blue);
-		effect_create_layer("Effects", ef_star, x + 30, y - 15, 5, c_white);
-		effect_create_layer("Effects", ef_star, x - 30, y + 30, 5, c_white);
-		effect_create_layer("Effects", ef_star, x + 30, y + 30, 5, c_blue);
+		effect_create_layer("Effects", ef_smoke, x, y - 30, 5, c_aqua);
+		effect_create_layer("Effects", ef_smoke, x, y, 5, c_gray);
+		effect_create_layer("Effects", ef_smoke, x - 30, y - 15, 5, c_ltgray);
+		effect_create_layer("Effects", ef_smoke, x + 30, y - 15, 5, c_white);
+		effect_create_layer("Effects", ef_smoke, x - 30, y + 30, 5, c_white);
+		effect_create_layer("Effects", ef_smoke, x + 30, y + 30, 5, c_ltgray);
 }
 
 attempt_pickup = function() {
