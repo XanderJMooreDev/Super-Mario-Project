@@ -14,25 +14,25 @@ spiky = false;
 standStill = false;
 upsideDown = false;
 
-enemy_types = [ "Goomba", "Troopa_G", "Troopa_G_No_Shell", "Spiny", "Piranha Plant", "Piranha Plant U", "Rex", "Rex_Stomped" ];
-enemy_walk_sprites = [ spr_goomba, spr_troopa_g_walk, spr_troopa_g_walk_no_shell, spr_spiny, spr_piranha_plant, spr_piranha_plant, spr_rex, spr_rex_stomped ];
+enemy_types = [ "Ashon", "Cubub", "Cubub_No_Cube", "Heatrop", "Inspout", "Inspout_U", "Crumblow", "Crumblow_Stomped" ];
+enemy_walk_sprites = [ spr_goomba, spr_troopa_g_walk, spr_troopa_g_walk_no_shell, spr_spiny, spr_piranha_plant, spr_piranha_plant, spr_crumblow, spr_crumblow_stomped ];
 
 assign_properties = function() {
     turnOnEdge = false;
     
 	switch enemyType {
-        case "Troopa_G":
+        case "Cubub":
             image_xscale = 1.5;
             image_yscale = 1.5;
             break;
-        case "Spiny":
+        case "Heatrop":
             spiky = true;
             break;
-        case "Piranha Plant":
+        case "Inspout":
             spiky = true;
             standStill = true;
             break;
-        case "Piranha Plant U":
+        case "Inspout_U":
             spiky = true;
             standStill = true;
             upsideDown = true;
@@ -190,16 +190,16 @@ kill_stomp = function() {
         return;
     }
     
-    if enemyType == "Rex" {
-        enemyType = "Rex_Stomped";
+    if enemyType == "Crumblow" {
+        enemyType = "Crumblow_Stomped";
         walkSpeed = 3;
         velocityX *= 3/2;
         iFrames = 30;
         return;
     }
     
-    if enemyType == "Troopa_G" {
-        enemyType = "Troopa_G_No_Shell";
+    if enemyType == "Cubub" {
+        enemyType = "Cubub_No_Cube";
         
         instance_create_layer(x, y, "Instances", obj_shell);
         
@@ -225,17 +225,24 @@ kill_fall = function() {
 }
 
 animate = function() {
-    if slideVelocity > 0 {
-        if enemyType == "Troopa_G_No_Shell" {
-            sprite_index = spr_troopa_g_eject;
+    try {
+        if slideVelocity > 0 {
+            if enemyType == "Cubub_No_Cube" {
+                sprite_index = spr_troopa_g_eject;
+            }
         }
+        else {
+            sprite_index = enemy_walk_sprites[array_get_index(enemy_types, enemyType)];
+        }
+        
+        if velocityX != 0 {
+            image_xscale = image_yscale * velocityX / abs(velocityX);
+        }
+        
+        mask_index = sprite_index;
     }
-    else {
-        sprite_index = enemy_walk_sprites[array_get_index(enemy_types, enemyType)];
-    }
-    
-    if velocityX != 0 {
-        image_xscale = image_yscale * velocityX / abs(velocityX);
+    catch (ex) {
+        show_debug_message(enemyType);
     }
 }
 

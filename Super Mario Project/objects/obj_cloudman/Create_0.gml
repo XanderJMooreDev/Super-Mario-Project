@@ -15,9 +15,10 @@ hp = global.maxHp;
  * 2. Tornado Spin
  * 3. Draft Dash
  * 4. Stratuceps
+ * 5. Hatchet
  */
 
-abilities = [ true, true, true, true, false ];
+abilities = [ false, false, false, false, false, false ];
 
 spinFrame = 9;
 attackFrame = 9;
@@ -389,15 +390,19 @@ check_ground_at = function(cx, cy) {
 	
 	for (i = 0; i < array_length(breakable_terrain); i++) {
 		if place_meeting(cx, cy, breakable_terrain[i]) {
-			if place_meeting(cx, cy, breakable_terrain[i]) && gpAirStall < 0 && powerUp != "Small" {
-				instance_destroy(instance_place(cx, cy, breakable_terrain[i]));
+            if !abilities[5] {
+                return true;
+            }
+            
+			if gpAirStall < 0 {
+				instance_place(cx, cy, breakable_terrain[i]).damage();
 				
 				return false;
 			}
 			
-			if place_meeting(x, y + velocityY, breakable_terrain[i]) && velocityY < 0 && powerUp != "Small" {
-				instance_destroy(instance_place(x, y + velocityY, breakable_terrain[i]));
-				
+			if place_meeting(x, y + velocityY, breakable_terrain[i]) && velocityY < 0 {
+				instance_place(cx, cy, breakable_terrain[i]).damage();
+                
 				velocityY = 0;
 			}
 			
@@ -503,6 +508,12 @@ check_ground_at = function(cx, cy) {
             take_damage();
         }
 	}
+    
+    if place_meeting(x, y, obj_major_item) {
+        show_debug_message(instance_place(x, y, obj_major_item).item_id);
+        abilities[instance_place(x, y, obj_major_item).item_id] = true;
+        instance_destroy(instance_place(x, y, obj_major_item));
+    }
 	
 	return false;
 }
